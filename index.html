@@ -3,113 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Insulin Challenge - Pharmacist's Journey</title>
+  <title>MNU Pharmacology | Insulin Clinical Mastery</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --mnu-navy: #071329;
+      --mnu-deep: #040a17;
+      --mnu-gold: #d4af37;
+      --mnu-gold-light: #f3d06b;
+      --mnu-cyan: #0ea5e9;
+    }
     * {
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-royal {
+      font-family: 'Cinzel', serif;
     }
     body {
-      background-color: #060b14;
-      color: #f1f5f9;
+      background-color: var(--mnu-deep);
+      color: #f8fafc;
       min-height: 100vh;
       overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 45%),
-        linear-gradient(to bottom, #060b14, #0b1324);
+        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.12) 0%, transparent 42%),
+        radial-gradient(circle at 85% 85%, rgba(14, 165, 233, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, #0b1d3a 0%, #040a17 100%);
     }
-    .glass-card {
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(56, 189, 248, 0.22);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    .luxury-card {
+      background: linear-gradient(145deg, rgba(11, 25, 52, 0.92), rgba(6, 15, 33, 0.96));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .logo-ring {
+      background: #ffffff;
+      border: 2.5px solid var(--mnu-gold);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+      transition: transform 0.3s ease;
+    }
+    .logo-ring:hover {
+      transform: scale(1.06);
     }
     .stage-card {
-      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 1px solid rgba(212, 175, 55, 0.22);
     }
     .stage-card:not(.locked):hover {
-      transform: translateY(-6px) scale(1.015);
-      border-color: rgba(34, 211, 238, 0.6);
-      box-shadow: 0 16px 40px rgba(6, 182, 212, 0.22);
+      transform: translateY(-6px);
+      border-color: var(--mnu-gold);
+      box-shadow: 0 16px 36px rgba(212, 175, 55, 0.22);
     }
     .option-btn {
       transition: all 0.2s ease;
     }
     .option-btn:not(:disabled):hover {
-      transform: translateX(4px);
-      background: rgba(30, 41, 59, 0.95);
-      border-color: rgba(56, 189, 248, 0.55);
+      transform: translateX(5px);
+      background: rgba(15, 34, 68, 0.98);
+      border-color: var(--mnu-gold);
     }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 18px rgba(34, 211, 238, 0.25); }
-      50% { box-shadow: 0 0 32px rgba(34, 211, 238, 0.55); }
+    .gold-btn {
+      background: linear-gradient(135deg, #d4af37 0%, #f3d06b 50%, #b8860b 100%);
+      color: #040a17;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
     }
-    .glow-active {
-      animation: pulseGlow 2.4s infinite;
+    .gold-btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
     }
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-8px); }
       40%, 80% { transform: translateX(8px); }
     }
-    .animate-shake {
-      animation: shake 0.45s ease-in-out;
-    }
+    .animate-shake { animation: shake 0.42s ease-in-out; }
     @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.92) translateY(12px); }
+      0% { opacity: 0; transform: scale(0.95) translateY(10px); }
       100% { opacity: 1; transform: scale(1) translateY(0); }
     }
-    .animate-pop {
-      animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+    .animate-pop { animation: popIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   </style>
 </head>
-<body class="flex flex-col items-center justify-between p-4 sm:p-6">
+<body class="flex flex-col items-center justify-between p-3 sm:p-6">
 
-  <!-- Top Navigation Header -->
-  <header class="w-full max-w-4xl flex items-center justify-between glass-card rounded-2xl px-4 py-3 mb-4">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-emerald-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg">
-        💉
+  <!-- Academic Institutional Top Header -->
+  <header class="w-full max-w-5xl luxury-card rounded-3xl px-4 sm:px-6 py-3.5 mb-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <!-- 3 Official Logos + Academic Title -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <div class="flex items-center -space-x-2 sm:space-x-2">
+          <img src="mnu-logo.jpg" alt="Mansoura National University" onerror="this.style.display='none'"
+               class="w-11 h-11 sm:w-13 sm:h-13 rounded-full object-cover logo-ring">
+          <img src="pharmacy-logo.jpg" alt="Faculty of Pharmacy MNU" onerror="this.style.display='none'"
+               class="w-11 h-11 sm:w-13 sm:h-13 rounded-full object-cover logo-ring">
+          <img src="pharma-dept-logo.jpg" alt="Pharmacology & Toxicology Dept" onerror="this.style.display='none'"
+               class="w-11 h-11 sm:w-13 sm:h-13 rounded-full object-cover logo-ring">
+        </div>
+        <div>
+          <div class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-400">
+            Mansoura National University • Faculty of Pharmacy
+          </div>
+          <h1 class="font-extrabold text-sm sm:text-lg text-white leading-tight">
+            Pharmacology & Toxicology Department
+          </h1>
+          <p class="text-[11px] text-sky-300 font-medium">Insulin Clinical Board Challenge (36 Advanced Cases)</p>
+        </div>
       </div>
-      <div>
-        <h1 class="font-extrabold text-base sm:text-lg text-white leading-tight">Insulin Challenge</h1>
-        <p class="text-xs text-cyan-400 font-medium">Pharmacist's Clinical Journey</p>
-      </div>
-    </div>
 
-    <div class="flex items-center gap-2 sm:gap-4">
-      <div class="bg-slate-900/90 border border-slate-700/80 px-3 py-1.5 rounded-xl flex items-center gap-2">
-        <span class="text-amber-400 text-sm">🏆</span>
-        <span id="globalScore" class="font-bold text-sm text-amber-300">0</span>
+      <!-- Score, Rank & Sound -->
+      <div class="flex items-center gap-2.5 self-end md:self-center">
+        <div class="bg-slate-950/90 border border-amber-500/30 px-3.5 py-1.5 rounded-xl flex items-center gap-1.5">
+          <span class="text-amber-400 text-sm">🏆</span>
+          <span id="globalScore" class="font-extrabold text-sm text-amber-300">0</span>
+        </div>
+        <div id="rankBadge" class="bg-sky-950/80 border border-sky-400/30 px-3 py-1.5 rounded-xl text-xs font-bold text-sky-200">
+          🎓 MNU Pharmacy Student
+        </div>
+        <button onclick="toggleSound()" id="soundBtn" title="Toggle Audio"
+                class="w-9 h-9 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-500/30 flex items-center justify-center text-sm transition">
+          🔊
+        </button>
       </div>
-      <div id="rankBadge" class="hidden sm:flex bg-cyan-950/80 border border-cyan-500/30 px-3 py-1.5 rounded-xl text-xs font-bold text-cyan-300">
-        Pharmacy Student
-      </div>
-      <button onclick="toggleSound()" id="soundBtn" title="Sound Effects" class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700 flex items-center justify-center text-sm transition">
-        🔊
-      </button>
     </div>
   </header>
 
-  <!-- Main Dynamic Container -->
-  <main id="appContainer" class="w-full max-w-4xl flex-1 flex flex-col justify-center my-2">
-    <!-- Screens rendered via JS -->
-  </main>
+  <!-- Main Dynamic Workspace -->
+  <main id="appContainer" class="w-full max-w-5xl flex-1 flex flex-col justify-center my-1"></main>
 
-  <!-- Footer -->
-  <footer class="w-full max-w-4xl text-center text-xs text-slate-500 mt-4 py-2">
-    Interactive Clinical Pharmacy & Endocrinology Training • Unlock all 4 stages to earn Consultant Rank
+  <!-- Academic Footer -->
+  <footer class="w-full max-w-5xl text-center text-[11px] text-slate-400 mt-4 py-2 border-t border-slate-800/70">
+    Pharmacology & Toxicology Department • Faculty of Pharmacy • Mansoura National University (MNU)
   </footer>
 
   <script>
-    // --- Audio Synthesizer (Web Audio API) ---
+    // --- Audio Engine ---
     let soundEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -120,7 +152,7 @@
       const gain = audioCtx.createGain();
       osc.type = type;
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
-      gain.gain.setValueAtTime(0.12, audioCtx.currentTime + delay);
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime + delay);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + duration);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -129,14 +161,14 @@
     }
 
     const sfx = {
-      correct: () => { playTone(523.25, 'sine', 0.14, 0); playTone(659.25, 'sine', 0.22, 0.1); },
-      wrong: () => { playTone(220, 'sawtooth', 0.18, 0); playTone(165, 'sawtooth', 0.28, 0.14); },
-      click: () => { playTone(440, 'triangle', 0.06, 0); },
+      correct: () => { playTone(587.33, 'sine', 0.13, 0); playTone(880, 'sine', 0.22, 0.09); },
+      wrong: () => { playTone(190, 'sawtooth', 0.2, 0); playTone(145, 'sawtooth', 0.3, 0.14); },
+      click: () => { playTone(520, 'triangle', 0.05, 0); },
       win: () => {
-        playTone(523.25, 'sine', 0.15, 0);
-        playTone(659.25, 'sine', 0.15, 0.12);
-        playTone(783.99, 'sine', 0.15, 0.24);
-        playTone(1046.50, 'sine', 0.35, 0.36);
+        playTone(523.25, 'sine', 0.14, 0);
+        playTone(659.25, 'sine', 0.14, 0.11);
+        playTone(783.99, 'sine', 0.14, 0.22);
+        playTone(1046.50, 'sine', 0.38, 0.33);
       }
     };
 
@@ -145,185 +177,311 @@
       document.getElementById('soundBtn').textContent = soundEnabled ? '🔊' : '🔇';
     }
 
-    // --- Game Curriculum Data (4 Stages, 20 Questions) ---
+    // --- 6 Advanced Modules (6 Questions Each = 36 Hardcore Clinical Questions) ---
     const STAGES = [
       {
         id: 1,
-        title: "Stage 1: Physiology & Pancreas",
-        subtitle: "Beta Cells, Secretion & GLUT4",
+        title: "Module 1: Molecular Pharmacology & SAR",
+        subtitle: "Receptor Tyrosine Kinase, Hexamers & Analog Design",
         icon: "🧬",
-        color: "from-cyan-500 to-blue-600",
-        timePerQ: 25,
+        timePerQ: 22,
         questions: [
           {
-            q: "Which specific pancreatic Islets of Langerhans cells synthesize and secrete insulin?",
-            options: ["Alpha cells", "Beta cells", "Delta cells", "PP (F) cells"],
-            correct: 1,
-            hint: "Alpha cells secrete glucagon, whereas insulin comes from the most abundant islet cell type.",
-            explanation: "Pancreatic Beta (β) cells produce and secrete insulin in response to elevated blood glucose, whereas Alpha cells secrete glucagon and Delta cells secrete somatostatin."
-          },
-          {
-            q: "Which biomarker is co-secreted in equimolar amounts with endogenous insulin and helps differentiate endogenous production from exogenous insulin injection?",
-            options: ["C-Peptide", "HbA1c", "Amylin", "Proglucagon"],
+            q: "Insulin receptor activation triggers tyrosine autophosphorylation on the intracellular beta-subunits, recruiting IRS-1/2 to activate which key enzyme responsible for PIP3 generation and GLUT4 translocation?",
+            options: ["Phosphatidylinositol 3-kinase (PI3K)", "Adenylyl Cyclase", "Phospholipase C-beta", "Guanylyl Cyclase"],
             correct: 0,
-            hint: "It is cleaved from proinsulin inside secretory granules before release.",
-            explanation: "C-Peptide (Connecting Peptide) is cleaved from proinsulin and released in equal molar amounts with endogenous insulin. Exogenous pharmaceutical insulin contains no C-peptide."
+            hint: "PI3K phosphorylates PIP2 to PIP3, activating PDK1 and Akt (Protein Kinase B).",
+            explanation: "The metabolic signaling arm of insulin operates via IRS-1 → PI3K → PIP3 → Akt (PKB), which phosphorylates AS160 to promote GLUT4 vesicle exocytosis."
           },
           {
-            q: "Which glucose transporter is insulin-dependent and translocates to the cell membrane of skeletal muscle and adipose tissue upon insulin receptor activation?",
-            options: ["GLUT1", "GLUT2", "GLUT4", "SGLT2"],
-            correct: 2,
-            hint: "Think of the transporter stored in intracellular vesicles in muscle and fat cells.",
-            explanation: "GLUT4 is stored in intracellular vesicles in skeletal muscle and adipocytes; insulin binding to its tyrosine kinase receptor triggers GLUT4 translocation to the plasma membrane."
+            q: "In Insulin Aspart (NovoLog), which specific amino acid substitution prevents self-association into hexamers and accelerates subcutaneous absorption?",
+            options: ["Proline at B28 is replaced with negatively charged Aspartic acid", "Asparagine at A21 is replaced with Glycine", "Lysine at B29 is acylated with myristic acid", "B28 Proline and B29 Lysine are inverted"],
+            correct: 0,
+            hint: "Electrostatic repulsion between negatively charged Aspartate residues destabilizes dimers.",
+            explanation: "Replacing Proline B28 with Aspartic acid introduces charge repulsion at the monomer-monomer interface, ensuring rapid dissociation into monomers."
           },
           {
-            q: "What is the primary physiological effect of insulin on hepatic (liver) glycogen metabolism?",
-            options: ["Stimulates glycogenolysis", "Stimulates glycogenesis and inhibits gluconeogenesis", "Increases ketone body synthesis", "Stimulates lipolysis"],
-            correct: 1,
-            hint: "Insulin is an anabolic storage hormone.",
-            explanation: "Insulin promotes glucose storage as glycogen (glycogenesis) in the liver and muscles while suppressing hepatic glucose output (gluconeogenesis and glycogenolysis)."
+            q: "Insulin Glargine U-100 remains soluble in the acidic vial (pH 4.0) due to which structural modification that shifts its isoelectric point (pI) from 5.4 to 6.7?",
+            options: ["Substitution of Glycine at A21 and addition of two Arginine residues at B31–B32", "Addition of a C16 fatty diacid chain at B29", "Complexation with zinc and protamine", "Deletion of Threonine at B30"],
+            correct: 0,
+            hint: "Two positively charged Arginines shift the isoelectric point toward neutral physiological pH.",
+            explanation: "Adding two basic Arginine residues at the C-terminus of the B-chain (and substituting Glycine at A21 for stability) raises the pI to ~6.7, causing microprecipitation upon injection into neutral (pH 7.4) tissue."
           },
           {
-            q: "In pancreatic beta cells, elevated intracellular ATP closes which ion channel to trigger depolarization and insulin exocytosis?",
-            options: ["Voltage-gated Na+ channels", "ATP-sensitive K+ (KATP) channels", "Cl- channels", "Ligand-gated Ca2+ channels"],
-            correct: 1,
-            hint: "Sulfonylurea drugs bind to this exact channel complex (SUR1 subunit).",
-            explanation: "Glucose metabolism raises the ATP/ADP ratio, closing ATP-sensitive K+ channels. This depolarizes the beta-cell membrane, opening voltage-gated Ca2+ channels and triggering insulin release."
+            q: "How does Insulin Degludec (Tresiba) achieve an ultra-long flat pharmacokinetic profile lasting >42 hours?",
+            options: ["Conjugation of a C16 fatty diacid via a glutamic acid spacer at B29 forms soluble subcutaneous multi-hexamer chains", "Insoluble crystalline precipitation at the injection site", "Covalent irreversible binding to serum albumin", "Inhibition of hepatic Insulin-Degrading Enzyme (IDE)"],
+            correct: 0,
+            hint: "Upon phenol diffusion after injection, di-hexamers link into long soluble multi-hexamer chains.",
+            explanation: "Insulin Degludec lacks B30 Threonine and features a hexadecanedioic acid chain at B29, forming long multi-hexamer chains that slowly release monomers as zinc diffuses."
+          },
+          {
+            q: "Which mitogenic signaling pathway is activated by insulin via Shc and Grb2 recruitment, explaining why supra-physiological insulin levels can promote vascular smooth muscle proliferation?",
+            options: ["Ras / Raf / MEK / ERK (MAPK) cascade", "cAMP / Epac / Rap1 pathway", "JAK1 / STAT3 cytokine pathway", "Notch / Delta developmental pathway"],
+            correct: 0,
+            hint: "Unlike the PI3K metabolic pathway, this pathway remains sensitive during insulin resistance.",
+            explanation: "Insulin activates the Ras-MAPK (ERK1/2) mitogenic pathway. In Type 2 Diabetes, selective PI3K resistance with preserved MAPK signaling contributes to atherosclerosis."
+          },
+          {
+            q: "In pancreatic beta cells, closure of KATP channels (composed of Kir6.2 and SUR1 subunits) opens which specific voltage-gated channel to trigger insulin granule exocytosis?",
+            options: ["L-type voltage-gated Ca2+ channels", "T-type voltage-gated Na+ channels", "GABA-A chloride channels", "NMDA glutamate channels"],
+            correct: 0,
+            hint: "Intracellular calcium influx activates synaptotagmin to fuse insulin vesicles with the plasma membrane.",
+            explanation: "Depolarization opens L-type voltage-gated Ca2+ channels; the resulting Ca2+ influx triggers SNARE-mediated exocytosis of insulin-containing secretory granules."
           }
         ]
       },
       {
         id: 2,
-        title: "Stage 2: Insulin Types & Kinetics",
-        subtitle: "Onset, Peak, Duration & Mixing Rules",
-        icon: "⏱️",
-        color: "from-emerald-500 to-teal-600",
+        title: "Module 2: Clinical Pharmacokinetics & Dosing",
+        subtitle: "TDD, Rule of 1800/1500, ICR & Basal Transitions",
+        icon: "🧮",
         timePerQ: 25,
         questions: [
           {
-            q: "Which of the following is classified as a rapid-acting insulin analog administered 0–15 minutes before meals?",
-            options: ["Insulin Glargine", "Insulin Lispro", "NPH Insulin", "Regular Insulin"],
-            correct: 1,
-            hint: "Its amino acid sequence at B28 and B29 is inverted to prevent hexamer formation.",
-            explanation: "Insulin Lispro (along with Aspart and Glulisine) is a rapid-acting analog with an onset of 10–20 minutes, peak at 1–3 hours, and duration of 3–5 hours."
-          },
-          {
-            q: "Which insulin is an intermediate-acting cloudy suspension that peaks at 4–10 hours and carries a notable risk of nocturnal hypoglycemia?",
-            options: ["Insulin Detemir", "Insulin Degludec", "NPH (Isophane) Insulin", "Insulin Glulisine"],
-            correct: 2,
-            hint: "It contains protamine and zinc, giving it a cloudy appearance.",
-            explanation: "NPH (Neutral Protamine Hagedorn) is an intermediate-acting cloudy suspension (onset 1–2 hrs, peak 4–10 hrs, duration 12–18 hrs) that must be gently rolled before injection."
-          },
-          {
-            q: "Why should Insulin Glargine (Lantus) NEVER be mixed in the same syringe with any other insulin?",
-            options: ["It causes immediate precipitation due to its acidic pH (pH 4)", "It destroys rapid-acting insulin enzymes", "It turns into a solid gel", "It doubles the absorption rate"],
+            q: "A 64 kg patient with newly diagnosed Type 1 Diabetes is started on basal-bolus therapy at 0.5 units/kg/day (50% basal, 50% prandial). What is the prescribed mealtime dose per meal (3 meals/day)?",
+            options: ["~5 to 5.5 units of rapid-acting insulin before each meal", "16 units before each meal", "10 units before each meal", "2 units before each meal"],
             correct: 0,
-            hint: "Glargine is formulated as a clear acidic solution that precipitates at neutral physiological pH.",
-            explanation: "Insulin Glargine is formulated at an acidic pH (~4.0) to remain soluble in the vial; mixing it with neutral insulins alters its pH and ruins its predictable 24-hour flat profile."
+            hint: "TDD = 64 × 0.5 = 32 units. Half (16 units) is basal, and half (16 units) is divided across 3 meals.",
+            explanation: "TDD = 32 units/day → 16 units basal + 16 units prandial. Dividing 16 units across 3 meals gives ~5.3 units (rounded to 5 units) per meal."
           },
           {
-            q: "When drawing up Regular insulin and NPH insulin into the same syringe, what is the golden rule?",
-            options: ["Cloudy before Clear (NPH first)", "Clear before Cloudy (Regular first)", "Shake NPH vigorously first", "Order does not matter"],
-            correct: 1,
-            hint: "Think 'RN' — Regular before NPH to avoid contaminating the clear vial with protamine.",
-            explanation: "Always draw 'Clear before Cloudy' (Regular before NPH) so that protamine from the cloudy NPH vial does not contaminate the clear Regular insulin vial."
-          },
-          {
-            q: "Which ultra-long-acting basal insulin forms soluble multi-hexamers subcutaneously and has a duration of action exceeding 42 hours?",
-            options: ["Insulin Degludec (Tresiba)", "Regular Insulin", "Insulin Aspart", "NPH Insulin"],
+            q: "A patient using Regular Human Insulin (not rapid-acting analog) has a Total Daily Dose (TDD) of 60 units. Applying the 'Rule of 1500', what is their Insulin Sensitivity Factor (ISF)?",
+            options: ["1 unit lowers blood glucose by 25 mg/dL", "1 unit lowers blood glucose by 30 mg/dL", "1 unit lowers blood glucose by 50 mg/dL", "1 unit lowers blood glucose by 15 mg/dL"],
             correct: 0,
-            hint: "Its half-life is approximately 25 hours, allowing flexible daily dosing.",
-            explanation: "Insulin Degludec forms subcutaneous multi-hexamer chains that slowly release monomers, providing a flat basal profile lasting over 42 hours."
+            hint: "Divide 1500 by 60 units (Rule of 1500 is used for Regular insulin; Rule of 1800 for rapid analogs).",
+            explanation: "ISF = 1500 ÷ 60 = 25 mg/dL drop per 1 unit of Regular insulin."
+          },
+          {
+            q: "A patient has a pre-dinner glucose of 270 mg/dL (target 120 mg/dL), an ISF of 50 mg/dL/unit, an Insulin-to-Carb Ratio (ICR) of 1:12, and consumes 72 g of carbohydrates. Calculate the total pre-dinner dose.",
+            options: ["9 units (3 units correction + 6 units meal)", "7 units (1 unit correction + 6 units meal)", "11 units (5 units correction + 6 units meal)", "6 units (0 units correction + 6 units meal)"],
+            correct: 0,
+            hint: "Correction = (270 - 120) ÷ 50 = 3 units. Carb bolus = 72 ÷ 12 = 6 units.",
+            explanation: "Correction = 150 / 50 = 3 units. Meal coverage = 72 / 12 = 6 units. Total pre-dinner rapid-acting dose = 9 units."
+          },
+          {
+            q: "When converting a patient from Insulin Glargine U-300 (Toujeo) 50 units once daily to Insulin Glargine U-100 (Lantus) once daily, what dose adjustment is recommended by FDA labeling?",
+            options: ["Reduce the initial daily dose by 20% (to 40 units) to prevent hypoglycemia", "Increase the dose by 20% (to 60 units)", "Divide the dose into three daily injections", "Keep the exact same 50 units"],
+            correct: 0,
+            hint: "U-100 has slightly higher bioavailability than U-300, so switching from U-300 → U-100 requires a 20% reduction.",
+            explanation: "Because U-300 has lower bioavailability than U-100, switching from U-300 to U-100 requires reducing the dose by 20% (50 × 0.8 = 40 units) to avoid hypoglycemia."
+          },
+          {
+            q: "Which insulin formulation contains 70% Insulin Aspart Protamine suspension and 30% soluble Insulin Aspart, and must be injected within 15 minutes before a meal?",
+            options: ["NovoLog Mix 70/30 (Biphasic Insulin Aspart)", "Humulin 70/30 (NPH/Regular)", "Ryzodeg 70/30 (Degludec/Aspart)", "Humalog Mix 50/50"],
+            correct: 0,
+            hint: "Premixed analog insulins have a rapid onset (~10–20 min) unlike human 70/30 mixes (30–45 min).",
+            explanation: "NovoLog Mix 70/30 combines 70% intermediate-acting protaminated aspart with 30% rapid-acting soluble aspart, allowing administration immediately (0–15 min) before meals."
+          },
+          {
+            q: "Ryzodeg 70/30 is a co-formulation of 70% Insulin Degludec and 30% Insulin Aspart. Unlike NPH-based premixes, why does Ryzodeg NOT require resuspension (rolling) before injection?",
+            options: ["Both Insulin Degludec and Insulin Aspart remain completely clear and soluble in the same formulation", "It is a dry powder inhaler", "It contains a surfactant that prevents settling", "It is injected intravenously"],
+            correct: 0,
+            hint: "It is a clear solution rather than a cloudy protamine suspension.",
+            explanation: "Ryzodeg 70/30 is a clear, soluble co-formulation in which Degludec di-hexamers and Aspart monomers coexist without protamine crystals, eliminating resuspension errors."
           }
         ]
       },
       {
         id: 3,
-        title: "Stage 3: Clinical Cases & Emergencies",
-        subtitle: "Hypoglycemia, DKA & Injection Technique",
-        icon: "🚑",
-        color: "from-amber-500 to-orange-600",
-        timePerQ: 25,
+        title: "Module 3: ICU & Hyperglycemic Crises",
+        subtitle: "DKA, HHS, Anion Gap & IV-to-SC Transition",
+        icon: "🚨",
+        timePerQ: 20,
         questions: [
           {
-            q: "A conscious diabetic patient presents with tremors, sweating, and a blood glucose of 54 mg/dL. According to the 'Rule of 15', what is the first-line intervention?",
-            options: ["Administer 15 units of Regular insulin", "Give 15–20 g of fast-acting carbohydrates and recheck in 15 minutes", "Give a high-fat chocolate bar immediately", "Inject IV potassium"],
-            correct: 1,
-            hint: "Fast-acting simple sugars (glucose tablets or 4 oz juice) raise blood sugar rapidly without fat delay.",
-            explanation: "The Rule of 15 states: administer 15–20 g of fast-acting glucose (e.g., 3–4 glucose tablets or 120 mL fruit juice), wait 15 minutes, and recheck blood glucose."
-          },
-          {
-            q: "In Diabetic Ketoacidosis (DKA) management, why must serum potassium (K+) be checked before starting an IV Regular insulin infusion?",
-            options: ["Insulin drives extracellular K+ into cells, risking fatal hypokalemia", "Insulin causes severe hyperkalemia", "Potassium inactivates IV insulin", "DKA always causes high serum sodium"],
+            q: "A 24-year-old with DKA has blood glucose 480 mg/dL, arterial pH 7.14, HCO3- 10 mEq/L, and serum potassium (K+) 3.1 mEq/L. What is the mandatory FIRST step before initiating IV insulin?",
+            options: ["Administer IV fluid resuscitation and potassium chloride (20–40 mEq/hr) while holding insulin until K+ ≥ 3.3 mEq/L", "Start IV Regular insulin bolus 0.1 units/kg immediately", "Give IV Sodium Bicarbonate 100 mEq", "Administer SC Insulin Glargine 30 units"],
             correct: 0,
-            hint: "Insulin stimulates the Na+/K+-ATPase pump.",
-            explanation: "Insulin activates Na+/K+-ATPase pumps, shifting potassium intracellularly. If serum K+ is < 3.3 mEq/L, potassium must be repleted BEFORE starting insulin to prevent cardiac arrhythmias."
+            hint: "Starting insulin when K+ < 3.3 mEq/L can precipitate fatal hypokalemic cardiac arrest.",
+            explanation: "Insulin drives potassium into cells. When baseline K+ is < 3.3 mEq/L, insulin must be held and aggressive potassium replacement initiated until K+ ≥ 3.3 mEq/L."
           },
           {
-            q: "What complication occurs when a patient repeatedly injects insulin into the exact same abdominal spot without rotating sites?",
-            options: ["Lipohypertrophy, leading to erratic insulin absorption", "Severe anaphylaxis", "Permanent nerve paralysis", "Hyperthyroidism"],
+            q: "During IV insulin therapy for DKA, what is the target hourly rate of blood glucose reduction to minimize the risk of cerebral edema?",
+            options: ["50 to 75 mg/dL per hour", "150 to 200 mg/dL per hour", "10 to 15 mg/dL per hour", "250 to 300 mg/dL per hour"],
             correct: 0,
-            hint: "Rubbery, thickened fatty lumps form under the skin.",
-            explanation: "Repeated injections in the same site cause lipohypertrophy (thickened, rubbery subcutaneous fat), which significantly delays and destabilizes insulin absorption."
+            hint: "Overly rapid drops in serum osmolality shift water into brain cells, especially in pediatric/young patients.",
+            explanation: "Blood glucose should decline steadily by 50–75 mg/dL/hr; if it falls faster, dextrose is added or the insulin infusion rate is adjusted."
           },
           {
-            q: "A patient has elevated fasting morning blood glucose (210 mg/dL) caused by an early-morning surge in growth hormone and cortisol without nocturnal hypoglycemia. What is this phenomenon called?",
-            options: ["Somogyi Effect", "Dawn Phenomenon", "Honeymoon Phase", "Brittle Diabetes"],
-            correct: 1,
-            hint: "It occurs naturally around 4:00–8:00 AM due to counter-regulatory hormones.",
-            explanation: "The Dawn Phenomenon is early-morning hyperglycemia caused by physiologic surges in cortisol and growth hormone, whereas the Somogyi Effect is rebound hyperglycemia following nocturnal hypoglycemia."
-          },
-          {
-            q: "Which route and insulin type are strictly used for initial inpatient IV infusion in Diabetic Ketoacidosis (DKA)?",
-            options: ["IV Regular Insulin", "IV Insulin Glargine", "IV NPH Insulin", "Subcutaneous Degludec"],
+            q: "A DKA patient's anion gap has closed (11 mEq/L), pH is 7.36, and HCO3- is 19 mEq/L. They are ready to transition off the IV insulin drip. If SC Insulin Glargine is injected at 08:00 AM, when should the IV Regular insulin infusion be stopped?",
+            options: ["At 10:00 AM (after a 2-hour overlap)", "At 08:00 AM simultaneously", "At 06:00 AM (2 hours prior)", "At 08:00 PM (12 hours later)"],
             correct: 0,
-            hint: "Only clear, short-acting human insulin is approved for continuous intravenous infusion.",
-            explanation: "Regular insulin is the standard insulin for IV infusion in DKA due to its short plasma half-life (~5–7 minutes IV), allowing rapid titration."
+            hint: "SC basal insulin takes 1.5–2 hours to reach therapeutic plasma concentrations.",
+            explanation: "A 1–2 hour overlap between SC basal insulin administration and stopping the IV insulin drip prevents a gap in insulin coverage and rebound ketoacidosis."
+          },
+          {
+            q: "In Hyperosmolar Hyperglycemic State (HHS), what is the single most critical initial therapeutic priority during the first 1–2 hours?",
+            options: ["Aggressive isotonic IV fluid resuscitation (0.9% NaCl at 15–20 mL/kg/hr) to restore intravascular volume and renal perfusion", "High-dose IV push Regular insulin", "IV Sodium Bicarbonate infusion", "Oral Metformin loading"],
+            correct: 0,
+            hint: "HHS patients have a massive total body water deficit averaging 8–10 liters.",
+            explanation: "Profound dehydration (8–10 L deficit) is the hallmark of HHS; aggressive IV fluid resuscitation restores hemodynamic stability and lowers glucose even before insulin is started."
+          },
+          {
+            q: "Which formula accurately calculates the Corrected Serum Sodium in a hyperglycemic patient presenting with blood glucose of 600 mg/dL and measured serum Na+ of 130 mEq/L?",
+            options: ["130 + [1.6 × (600 - 100)/100] = 138 mEq/L (or using 2.4 factor for >400 mg/dL = 142 mEq/L)", "130 - 10 = 120 mEq/L", "130 + 25 = 155 mEq/L", "Measured sodium requires no correction"],
+            correct: 0,
+            hint: "Hyperglycemia draws water out of cells, causing dilutional pseudohyponatremia (~1.6–2.4 mEq/L drop per 100 mg/dL glucose above 100).",
+            explanation: "For every 100 mg/dL glucose above 100 mg/dL, add 1.6 mEq/L (up to 2.4 mEq/L when glucose >400 mg/dL) to the measured sodium to determine true corrected sodium."
+          },
+          {
+            q: "When is IV Sodium Bicarbonate therapy considered in adult DKA management according to ADA guidelines?",
+            options: ["Only when arterial pH is < 6.90 due to severe life-threatening acidemia", "Routinely whenever pH is < 7.30", "Whenever serum ketones are positive", "Never under any circumstances"],
+            correct: 0,
+            hint: "Routine bicarbonate worsens intracellular acidosis, hypokalemia, and delays ketone clearance.",
+            explanation: "Insulin stops ketogenesis and regenerates bicarbonate endogenously; IV NaHCO3 is reserved solely for severe acidemia (pH < 6.9) associated with myocardial depression."
           }
         ]
       },
       {
         id: 4,
-        title: "Stage 4: Boss Challenge",
-        subtitle: "Drug Interactions & Complex Scenarios",
-        icon: "👑",
-        color: "from-purple-500 to-pink-600",
+        title: "Module 4: Toxicology & Overdose Management",
+        subtitle: "Massive Insulin Overdose, Hyperinsulinemia & Antidotes",
+        icon: "☠️",
         timePerQ: 20,
         questions: [
           {
-            q: "Non-selective beta-blockers (e.g., Propranolol) pose a dual danger in insulin-treated diabetic patients because they:",
-            options: ["Mask adrenergic hypoglycemia symptoms (tachycardia/tremors) and delay glycogenolysis recovery", "Cause rapid insulin degradation in the liver", "Increase renal glucose excretion", "Stimulate excessive insulin secretion"],
+            q: "A patient intentionally injects 300 units of Insulin Glargine U-100 in a suicide attempt. Why must clinicians anticipate prolonged, recurrent hypoglycemia lasting 24–48+ hours?",
+            options: ["Massive subcutaneous depot volume delays dissolution and absorption kinetics far beyond standard 24-hour duration", "Glargine covalently binds insulin receptors permanently", "Glargine blocks hepatic glucagon receptors", "Glargine inhibits renal glucose reabsorption"],
             correct: 0,
-            hint: "Sweating remains intact, while palpitations and tremors are blunted.",
-            explanation: "Beta-blockers mask sympathetic warning signs of hypoglycemia (palpitations, tremor)—leaving diaphoresis (sweating) as a key clue—and impair beta-2 mediated hepatic glycogenolysis."
+            hint: "Large subcutaneous depots have reduced surface-area-to-volume ratios, markedly slowing absorption.",
+            explanation: "In massive subcutaneous insulin overdose, depot compression and reduced blood flow prolong absorption for 36–72 hours, requiring continuous IV dextrose infusions and serial electrolyte monitoring."
           },
           {
-            q: "When initiating high-dose systemic corticosteroids (e.g., Prednisone 40 mg/day) in a patient on insulin, what glycemic adjustment is typically required?",
-            options: ["Increase insulin doses (especially prandial/afternoon coverage) due to steroid-induced insulin resistance", "Discontinue all basal insulin", "Switch to oral sulfonylureas only", "Reduce insulin by 50%"],
+            q: "Beyond severe hypoglycemia, what critical electrolyte disturbances must be aggressively monitored and replaced during massive insulin overdose resuscitation?",
+            options: ["Hypokalemia, Hypomagnesemia, and Hypophosphatemia", "Hyperkalemia and Hypercalcemia", "Hypernatremia and Hypermagnesemia", "Hyperphosphatemia only"],
             correct: 0,
-            hint: "Glucocorticoids promote hepatic gluconeogenesis and peripheral insulin resistance.",
-            explanation: "Systemic corticosteroids induce marked insulin resistance and postprandial hyperglycemia, typically requiring proactive escalation of insulin doses."
+            hint: "High-dose insulin + dextrose drives K+, Mg2+, and PO4^3- rapidly into intracellular compartments.",
+            explanation: "Supraphysiologic insulin and dextrose infusions stimulate intracellular uptake of potassium, magnesium, and phosphate, risking arrhythmias and respiratory muscle weakness."
           },
           {
-            q: "How should an unopened insulin vial or pen be stored, and how long can an in-use vial/pen typically remain at room temperature (< 25–30°C)?",
-            options: ["Refrigerated (2–8°C) until opened; once in use, keep at room temperature for up to 28 days", "Frozen at -10°C until needed", "Always refrigerated even during injection", "In direct sunlight for 60 days"],
+            q: "Which somatostatin analog is used as a specific antidote in Sulfonylurea-induced refractory hyperinsulinemic hypoglycemia (after dextrose) to suppress endogenous beta-cell insulin release?",
+            options: ["Octreotide (50–100 mcg SC/IV every 6–8 hours)", "Flumazenil", "N-Acetylcysteine", "Naloxone"],
             correct: 0,
-            hint: "Injecting cold insulin directly from the fridge causes pain and local irritation.",
-            explanation: "Unopened insulin is stored at 2–8°C (never frozen). Once opened/in-use, most insulins are kept at room temperature for up to 28 days (42 days for Levemir/Tresiba) to minimize injection pain."
+            hint: "Dextrose boluses alone trigger rebound endogenous insulin spikes in sulfonylurea toxicity; this peptide shuts down beta-cell secretion.",
+            explanation: "Octreotide binds somatostatin receptors (SSTR2/5) on pancreatic beta cells, inhibiting Ca2+ influx and halting sulfonylurea-stimulated insulin secretion."
           },
           {
-            q: "Which is the ONLY insulin product approved for intravenous (IV) administration among standard outpatient basal and human insulins?",
-            options: ["Regular Human Insulin", "NPH Insulin", "Insulin Glargine", "Insulin Detemir"],
+            q: "In toxicology, High-Dose Insulin Euglycemia Therapy (HIET) at 1 unit/kg/hr is a cornerstone life-saving treatment for severe poisoning with which cardiovascular drug classes?",
+            options: ["Calcium Channel Blockers (e.g., Verapamil, Amlodipine) and Beta-Blockers", "ACE Inhibitors and ARBs", "Loop Diuretics", "Statins"],
             correct: 0,
-            hint: "Suspensions and long-acting precipitants cannot enter the bloodstream directly.",
-            explanation: "Only Regular insulin (and certain rapid-acting analogs in hospital protocols) can be given IV; NPH and basal analogs are strictly for subcutaneous injection."
+            hint: "In cardiogenic shock from CCB/BB toxicity, myocardium switches from free fatty acids to carbohydrates; high-dose insulin acts as a positive inotrope.",
+            explanation: "HIET overcomes toxin-induced myocardial insulin resistance, enhances myocardial glucose uptake, and exerts potent positive inotropic and vasodilatory effects in CCB/BB overdose."
           },
           {
-            q: "A Type 1 Diabetes patient with nausea and vomiting cannot eat solid food. What critical counseling point must the pharmacist emphasize regarding their basal insulin?",
-            options: ["Never omit basal insulin during illness; monitor blood glucose and ketones frequently", "Stop all insulin until solid food is resumed", "Double the rapid-acting mealtime dose without eating", "Drink only caffeinated beverages"],
+            q: "How can forensic/clinical toxicologists distinguish factitious hypoglycemia caused by surreptitious exogenous insulin injection from an insulinoma or sulfonylurea ingestion?",
+            options: ["Exogenous insulin shows HIGH serum insulin with LOW C-peptide and negative sulfonylurea screen", "Exogenous insulin shows HIGH serum insulin and HIGH C-peptide", "Exogenous insulin shows LOW serum insulin and HIGH C-peptide", "C-peptide levels are identical in both conditions"],
             correct: 0,
-            hint: "Sick-day stress hormones raise blood glucose even when fasting.",
-            explanation: "During sick days, stress hormones drive hepatic glucose production and ketogenesis. Omitting basal insulin in Type 1 Diabetes can rapidly precipitate life-threatening DKA."
+            hint: "Commercial pharmaceutical insulin lacks the connecting peptide cleaved during endogenous proinsulin processing.",
+            explanation: "Exogenous insulin suppresses endogenous beta-cell secretion (low C-peptide < 0.2 nmol/L) despite elevated measured serum insulin, whereas insulinoma and sulfonylureas elevate both."
+          },
+          {
+            q: "Why is Glucagon often ineffective as a rescue therapy for hypoglycemia in patients with chronic alcohol abuse or severe hepatic cirrhosis?",
+            options: ["Hepatic glycogen stores are depleted, leaving no substrate for glucagon-stimulated glycogenolysis", "Ethanol destroys glucagon receptors", "Alcohol stimulates renal glucagon clearance", "Glucagon causes severe lactic acidosis in cirrhosis"],
+            correct: 0,
+            hint: "Glucagon raises blood sugar primarily by breaking down liver glycogen.",
+            explanation: "Ethanol inhibits gluconeogenesis and depletes hepatic glycogen; without liver glycogen reserves, glucagon cannot raise blood glucose, making IV dextrose mandatory."
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: "Module 5: Special Clinical Populations",
+        subtitle: "CKD, Pregnancy, Enteral/Parenteral Nutrition & Surgery",
+        icon: "🩺",
+        timePerQ: 20,
+        questions: [
+          {
+            q: "A patient with Type 2 Diabetes and Stage 4 CKD (eGFR 22 mL/min) experiences recurrent nocturnal hypoglycemia on Insulin Glargine. What pharmacokinetic mechanism explains this?",
+            options: ["Loss of renal tubular insulinase degradation prolongs exogenous insulin half-life, compounded by reduced renal gluconeogenesis", "Uremia increases hepatic insulin synthesis", "CKD accelerates subcutaneous absorption", "Glargine is excreted unchanged in bile only"],
+            correct: 0,
+            hint: "Healthy kidneys degrade ~30–40% of systemic exogenous insulin via proximal tubular endocytosis.",
+            explanation: "As eGFR falls below 30 mL/min, renal clearance of exogenous insulin decreases sharply and renal gluconeogenesis is impaired, requiring 25–50% insulin dose reductions."
+          },
+          {
+            q: "In a pregnant patient with Type 1 Diabetes immediately following delivery of the placenta, how should basal-bolus insulin doses be adjusted?",
+            options: ["Reduce insulin doses immediately by ~50% (back to or below pre-pregnancy doses) due to abrupt loss of placental contrainsulin hormones", "Double the insulin dose postpartum", "Maintain peak 3rd-trimester doses for 6 weeks", "Switch permanently to oral glyburide"],
+            correct: 0,
+            hint: "Human placental lactogen (hPL) has a short half-life and vanishes rapidly once the placenta is delivered.",
+            explanation: "Expulsion of the placenta abruptly eliminates human placental lactogen and progesterone, causing a dramatic drop in insulin resistance and high risk of severe postpartum hypoglycemia if doses are not cut immediately."
+          },
+          {
+            q: "Which insulin regimen is best matched to a hospitalized patient receiving continuous 24-hour enteral tube feedings?",
+            options: ["Scheduled basal insulin (or NPH every 8–12 hrs) plus Regular insulin every 6 hours (or rapid analog every 4 hours) for nutritional and correction coverage", "Once-daily rapid-acting insulin at bedtime only", "Sliding scale Regular insulin once every 24 hours", "High-dose mealtime bolus before stopping the tube feed"],
+            correct: 0,
+            hint: "If continuous tube feeding is unexpectedly interrupted, NPH every 8–12 hrs poses less prolonged hypoglycemia risk than 24-hour ultra-long basal analogs.",
+            explanation: "Continuous enteral nutrition requires steady coverage (such as NPH q8–12h or low-dose basal plus q4–6h short/rapid insulin), with clear protocols to start D10W if feeds are abruptly stopped."
+          },
+          {
+            q: "On the morning of major surgery (while NPO), how should a Type 1 Diabetes patient's long-acting basal insulin (e.g., Glargine) typically be managed?",
+            options: ["Administer 75–80% of the usual basal insulin dose (never omit completely) while holding prandial rapid-acting insulin", "Omit all basal and bolus insulin for 24 hours before surgery", "Give 150% of the usual basal dose", "Take full pre-meal rapid insulin while NPO"],
+            correct: 0,
+            hint: "Type 1 Diabetes patients always require basal insulin even when fasting to prevent surgical stress-induced DKA.",
+            explanation: "Omitting basal insulin in Type 1 Diabetes precipitates DKA during surgical stress; giving 75–80% of basal insulin prevents ketosis while minimizing NPO hypoglycemia."
+          },
+          {
+            q: "In a patient receiving Total Parenteral Nutrition (TPN) containing 250 g of dextrose per day, what is a common and safe method to deliver insulin?",
+            options: ["Add Regular Human Insulin directly into the TPN bag (typically starting at 1 unit per 10–15 g dextrose) so insulin delivery stops automatically if TPN is paused", "Add Insulin Glargine directly into the TPN bag", "Add NPH suspension into the TPN bag", "Give subcutaneous Degludec every 6 hours"],
+            correct: 0,
+            hint: "Only Regular Human Insulin is physically and chemically compatible inside TPN admixtures.",
+            explanation: "Regular insulin can be added directly to TPN bags (starting ~0.1 units/g dextrose); if TPN is interrupted, insulin infusion ceases simultaneously, preventing hypoglycemia."
+          },
+          {
+            q: "Which factor accelerates subcutaneous insulin absorption from the abdomen and can trigger unexpected exercise-induced hypoglycemia?",
+            options: ["Injecting into an exercising limb (e.g., thigh before running) or exposure to heat (hot sauna/shower) increasing local subcutaneous blood flow", "Injecting into fibrotic lipohypertrophy nodules", "Smoking immediately prior to injection", "Injecting cold insulin straight from the refrigerator"],
+            correct: 0,
+            hint: "Increased local capillary perfusion washes insulin monomers into the circulation faster.",
+            explanation: "Heat, massage, and vigorous exercise of the injected muscle bed increase local blood flow, markedly accelerating insulin absorption and causing early hypoglycemia."
+          }
+        ]
+      },
+      {
+        id: 6,
+        title: "Module 6: Grand Master Pharmacology Board",
+        subtitle: "Complex Drug Interactions, Antibodies & Rare Syndromes",
+        icon: "👑",
+        timePerQ: 18,
+        questions: [
+          {
+            q: "A patient on Empagliflozin (SGLT2 inhibitor) and insulin undergoes a pre-colonoscopy bowel prep and fasting without holding the SGLT2i. They present with nausea, Kussmaul breathing, pH 7.18, beta-hydroxybutyrate 5.4 mmol/L, and glucose 148 mg/dL. What is the mechanism?",
+            options: ["SGLT2i-mediated glycosuria lowers plasma glucose while fasting + reduced insulin increases glucagon/insulin ratio, driving unrestrained ketogenesis (euDKA)", "Excessive hepatic glycogenolysis", "SGLT2i directly stimulates pancreatic beta cells", "Metformin-induced respiratory alkalosis"],
+            correct: 0,
+            hint: "SGLT2 inhibitors should be held 3–4 days before scheduled surgery or prolonged fasting.",
+            explanation: "SGLT2 inhibitors lower the renal threshold for glucose, masking hyperglycemia while elevated glucagon and low insulin drive lipolysis and ketoacidosis (euglycemic DKA)."
+          },
+          {
+            q: "Why does combining a Thiazolidinedione (e.g., Pioglitazone) with exogenous insulin carry an FDA warning for heart failure exacerbation?",
+            options: ["Both insulin and PPAR-gamma agonists stimulate epithelial sodium channels (ENaC) in the renal collecting duct, causing synergistic fluid retention", "Pioglitazone causes direct coronary vasospasm", "Insulin blocks cardiac beta-1 receptors", "Pioglitazone accelerates insulin degradation"],
+            correct: 0,
+            hint: "Fluid retention occurs in up to 15% of patients on combination insulin + TZD therapy.",
+            explanation: "PPAR-gamma activation upregulates renal collecting duct sodium reabsorption (ENaC), which synergizes with insulin's antinatriuretic action to expand plasma volume."
+          },
+          {
+            q: "A patient treated with Levofloxacin for pneumonia while on basal-bolus insulin develops refractory, prolonged hypoglycemia. What is the direct cellular mechanism of fluoroquinolone-induced hypoglycemia?",
+            options: ["Blockade of pancreatic beta-cell ATP-sensitive K+ (KATP) channels, triggering inappropriate endogenous insulin exocytosis", "Inhibition of hepatic insulin receptor endocytosis", "Direct activation of GLUT4 in skeletal muscle", "Inhibition of intestinal alpha-glucosidase"],
+            correct: 0,
+            hint: "Fluoroquinolones act similarly to sulfonylureas on the beta-cell membrane.",
+            explanation: "Fluoroquinolones inhibit beta-cell KATP channels, depolarizing the membrane and stimulating calcium-dependent insulin secretion."
+          },
+          {
+            q: "A patient with long-standing Type 1 Diabetes develops 'Hypoglycemia Unawareness' (blood glucose drops to 42 mg/dL without sweating, tremor, or palpitations). What is the most effective clinical intervention to restore autonomic warning symptoms?",
+            options: ["Strict avoidance of hypoglycemia for 2–3 weeks by temporarily raising glycemic targets (e.g., 140–180 mg/dL) and utilizing CGM alarms", "Switching from analogs to NPH insulin", "Adding Propranolol 40 mg twice daily", "Increasing bedtime basal insulin by 30%"],
+            correct: 0,
+            hint: "Recurrent hypoglycemia blunts the sympathoadrenal counter-regulatory threshold (HAAF).",
+            explanation: "Hypoglycemia-Associated Autonomic Failure (HAAF) is reversible: 2–3 weeks of meticulous hypoglycemia avoidance restores sympathoadrenal symptom thresholds."
+          },
+          {
+            q: "A patient who previously received animal-derived or intermittent human insulin develops severe daytime insulin resistance (>300 units/day) followed by unpredictable nocturnal hypoglycemia due to high-titer IgG anti-insulin antibodies binding and randomly releasing insulin. What is this syndrome?",
+            options: ["Exogenous Insulin Antibody Syndrome (EIAS) / Hirata-like autoimmune insulin syndrome", "Brittle Diabetes due to gastroparesis", "Lipoatrophy", "Somogyi Effect"],
+            correct: 0,
+            hint: "Low-affinity, high-capacity IgG antibodies act as a buffering reservoir that releases free insulin unpredictably at night.",
+            explanation: "Anti-insulin antibodies bind exogenous insulin during the day (causing postprandial hyperglycemia) and dissociate erratically overnight, causing severe nocturnal hypoglycemia."
+          },
+          {
+            q: "A 3:00 AM capillary blood glucose check in a patient with morning fasting hyperglycemia (230 mg/dL) reads 52 mg/dL. How should the evening basal insulin dose be adjusted?",
+            options: ["Decrease the evening basal insulin dose (confirming the Somogyi Effect)", "Increase the evening basal insulin dose (Dawn Phenomenon)", "Add a bedtime rapid-acting insulin bolus", "Double the morning basal dose"],
+            correct: 0,
+            hint: "Nocturnal hypoglycemia at 3:00 AM triggers counter-regulatory surge (glucagon, epinephrine, cortisol) causing morning rebound hyperglycemia.",
+            explanation: "A 3:00 AM glucose <70 mg/dL confirms the Somogyi Effect (rebound hyperglycemia after nocturnal hypoglycemia), which is treated by reducing evening basal insulin."
           }
         ]
       }
@@ -331,17 +489,18 @@
 
     // --- State Management ---
     let state = {
-      screen: 'home', // home, map, quiz, stageResult
+      screen: 'home',
+      playerName: '',
       unlockedStage: 1,
       completedStages: {},
       totalScore: 0,
       currentStageId: 1,
       qIndex: 0,
-      hearts: 3,
+      hearts: 2,
       streak: 0,
       stageScore: 0,
       correctCount: 0,
-      timer: 25,
+      timer: 22,
       timerInterval: null,
       answered: false,
       lifelines: { fifty: true, hint: true, freeze: true },
@@ -355,51 +514,76 @@
     function updateHeader() {
       document.getElementById('globalScore').textContent = state.totalScore;
       const rankEl = document.getElementById('rankBadge');
-      if (state.totalScore >= 1600) rankEl.textContent = "👑 Endocrinology Consultant";
-      else if (state.totalScore >= 1000) rankEl.textContent = "🩺 Senior Clinical Pharmacist";
-      else if (state.totalScore >= 450) rankEl.textContent = "💊 Resident Pharmacist";
-      else rankEl.textContent = "🎓 Pharmacy Student";
+      if (state.totalScore >= 4200) rankEl.textContent = "👑 MNU Board Master";
+      else if (state.totalScore >= 2800) rankEl.textContent = "🩺 Clinical Specialist";
+      else if (state.totalScore >= 1400) rankEl.textContent = "💊 Senior PharmD Candidate";
+      else rankEl.textContent = "🎓 MNU Pharmacy Student";
     }
 
-    // --- Screen 1: Home / Intro ---
+    // --- Screen 1: Royal Academic Home ---
     function renderHome() {
       clearInterval(state.timerInterval);
       state.screen = 'home';
       app.innerHTML = `
-        <div class="glass-card rounded-3xl p-6 sm:p-10 text-center animate-pop max-w-2xl mx-auto">
-          <div class="inline-flex items-center gap-2 bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 px-4 py-1.5 rounded-full text-xs font-bold mb-5">
-            <span>🧪</span> Interactive Clinical Pharmacy Game
+        <div class="luxury-card rounded-3xl p-6 sm:p-10 text-center animate-pop max-w-3xl mx-auto">
+          
+          <!-- Institutional Emblem Showcase -->
+          <div class="flex items-center justify-center gap-4 sm:gap-6 mb-6">
+            <img src="mnu-logo.jpg" alt="MNU" onerror="this.style.display='none'"
+                 class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover logo-ring">
+            <img src="pharmacy-logo.jpg" alt="Faculty of Pharmacy" onerror="this.style.display='none'"
+                 class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover logo-ring">
+            <img src="pharma-dept-logo.jpg" alt="Pharmacology Dept" onerror="this.style.display='none'"
+                 class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover logo-ring">
           </div>
-          <h2 class="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight">
-            Insulin <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Challenge</span>
+
+          <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-400/35 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold mb-4">
+            <span>🏛️</span> Mansoura National University • Pharmacology & Toxicology Dept.
+          </div>
+
+          <h2 class="font-royal text-2xl sm:text-4xl font-black text-white mb-3 tracking-wide">
+            INSULIN CLINICAL <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500">MASTERY</span>
           </h2>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 max-w-xl mx-auto">
-            Advance through 4 progressive clinical stages—from pancreatic Beta-cell physiology and insulin pharmacokinetics to emergency DKA & hypoglycemia management.
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 max-w-2xl mx-auto">
+            An advanced board-style pharmacotherapy challenge featuring <strong>36 clinical cases</strong> across <strong>6 specialized modules</strong>: Molecular SAR, Dosing Math, ICU Crises, Toxicology, Special Populations & Complex Interactions.
           </p>
 
-          <div class="grid grid-cols-3 gap-3 mb-8 text-left">
-            <div class="bg-slate-900/80 border border-slate-800 p-3.5 rounded-2xl">
-              <div class="text-xl mb-1">🗺️</div>
-              <div class="font-bold text-white text-sm">4 Stages</div>
-              <div class="text-xs text-slate-400">20 Clinical Questions</div>
+          <!-- Student Name Input for Certificate -->
+          <div class="max-w-md mx-auto mb-6">
+            <input id="studentNameInput" type="text" value="${state.playerName}" placeholder="Enter your full name (for completion certificate)..."
+                   class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-amber-500/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 text-center font-semibold">
+          </div>
+
+          <div class="grid grid-cols-3 gap-3 mb-7 text-left max-w-2xl mx-auto">
+            <div class="bg-slate-950/80 border border-amber-500/20 p-3.5 rounded-2xl">
+              <div class="text-lg mb-1">📚</div>
+              <div class="font-bold text-amber-300 text-xs sm:text-sm">6 Modules</div>
+              <div class="text-[11px] text-slate-400">36 Hardcore Cases</div>
             </div>
-            <div class="bg-slate-900/80 border border-slate-800 p-3.5 rounded-2xl">
-              <div class="text-xl mb-1">❤️</div>
-              <div class="font-bold text-white text-sm">3 Lives</div>
-              <div class="text-xs text-slate-400">Per Stage Attempt</div>
+            <div class="bg-slate-950/80 border border-amber-500/20 p-3.5 rounded-2xl">
+              <div class="text-lg mb-1">💔</div>
+              <div class="font-bold text-rose-400 text-xs sm:text-sm">2 Lives Only</div>
+              <div class="text-[11px] text-slate-400">Pass ≥ 5/6 (83%)</div>
             </div>
-            <div class="bg-slate-900/80 border border-slate-800 p-3.5 rounded-2xl">
-              <div class="text-xl mb-1">🛟</div>
-              <div class="font-bold text-white text-sm">3 Lifelines</div>
-              <div class="text-xs text-slate-400">50:50, Hint & Freeze</div>
+            <div class="bg-slate-950/80 border border-amber-500/20 p-3.5 rounded-2xl">
+              <div class="text-lg mb-1">📜</div>
+              <div class="font-bold text-sky-300 text-xs sm:text-sm">MNU Certificate</div>
+              <div class="text-[11px] text-slate-400">Official Score Card</div>
             </div>
           </div>
 
-          <button onclick="sfx.click(); renderMap()" class="w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-lg shadow-xl glow-active transition transform hover:scale-105">
-            Start Journey 🚀
+          <button onclick="enterExam()" class="gold-btn w-full sm:w-auto px-12 py-4 rounded-2xl font-black text-base sm:text-lg transition">
+            Begin Clinical Examination 🚀
           </button>
         </div>
       `;
+    }
+
+    function enterExam() {
+      const inputEl = document.getElementById('studentNameInput');
+      if (inputEl) state.playerName = inputEl.value.trim() || "MNU Pharmacy Scholar";
+      sfx.click();
+      renderMap();
     }
 
     // --- Screen 2: Stage Map ---
@@ -408,26 +592,28 @@
       state.screen = 'map';
       updateHeader();
 
+      const allCompleted = Object.keys(state.completedStages).length === STAGES.length;
+
       const cardsHtml = STAGES.map(stage => {
         const isUnlocked = stage.id <= state.unlockedStage;
         const stars = state.completedStages[stage.id] || 0;
         return `
           <div onclick="${isUnlocked ? `startStage(${stage.id})` : ''}" 
-               class="stage-card glass-card rounded-2xl p-5 relative overflow-hidden ${isUnlocked ? 'cursor-pointer' : 'locked opacity-55 cursor-not-allowed'}">
+               class="stage-card luxury-card rounded-2xl p-5 relative overflow-hidden ${isUnlocked ? 'cursor-pointer' : 'locked opacity-50 cursor-not-allowed'}">
             <div class="flex items-start justify-between mb-3">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${stage.color} flex items-center justify-center text-2xl shadow-lg">
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400/20 to-sky-500/20 border border-amber-400/40 flex items-center justify-center text-xl">
                 ${isUnlocked ? stage.icon : '🔒'}
               </div>
               <div class="flex items-center gap-1 text-sm">
                 ${[1, 2, 3].map(i => `<span class="${i <= stars ? 'text-amber-400' : 'text-slate-700'}">★</span>`).join('')}
               </div>
             </div>
-            <h3 class="text-base sm:text-lg font-black text-white leading-snug mb-1">${stage.title}</h3>
+            <h3 class="text-sm sm:text-base font-extrabold text-white leading-snug mb-1">${stage.title}</h3>
             <p class="text-xs text-slate-400 mb-4">${stage.subtitle}</p>
-            <div class="flex items-center justify-between text-xs font-bold pt-3 border-t border-slate-800/80">
-              <span class="text-cyan-400">${stage.questions.length} Questions • ${stage.timePerQ}s</span>
-              <span class="${isUnlocked ? 'text-emerald-400' : 'text-slate-500'}">
-                ${stars > 0 ? 'Replay ↻' : (isUnlocked ? 'Play Now →' : 'Locked')}
+            <div class="flex items-center justify-between text-xs font-bold pt-3 border-t border-slate-800">
+              <span class="text-sky-300">${stage.questions.length} Cases • ${stage.timePerQ}s</span>
+              <span class="${isUnlocked ? 'text-amber-400' : 'text-slate-500'}">
+                ${stars > 0 ? 'Retake ↻' : (isUnlocked ? 'Enter →' : 'Locked')}
               </span>
             </div>
           </div>
@@ -436,29 +622,35 @@
 
       app.innerHTML = `
         <div class="animate-pop">
-          <div class="flex items-center justify-between mb-4 px-1">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4 px-1">
             <div>
-              <h2 class="text-xl sm:text-2xl font-black text-white">Select Clinical Stage</h2>
-              <p class="text-xs text-slate-400">Pass each stage (≥ 3/5 correct) to unlock the next level</p>
+              <h2 class="text-lg sm:text-2xl font-black text-white">Candidate: <span class="text-amber-400">${state.playerName}</span></h2>
+              <p class="text-xs text-slate-400">Achieve at least 5/6 correct answers per module to unlock the next level</p>
             </div>
-            <button onclick="sfx.click(); renderHome()" class="text-xs bg-slate-800/90 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-xl border border-slate-700">
-              ← Main Menu
-            </button>
+            <div class="flex items-center gap-2">
+              ${allCompleted ? `
+                <button onclick="renderCertificate()" class="gold-btn text-xs font-black px-4 py-2 rounded-xl">
+                  📜 View Certificate
+                </button>
+              ` : ''}
+              <button onclick="sfx.click(); renderHome()" class="text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 px-3.5 py-2 rounded-xl border border-amber-500/25">
+                ← Home
+              </button>
+            </div>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             ${cardsHtml}
           </div>
         </div>
       `;
     }
 
-    // --- Screen 3: Active Quiz Gameplay ---
+    // --- Screen 3: Quiz Gameplay ---
     function startStage(stageId) {
       sfx.click();
-      const stage = STAGES.find(s => s.id === stageId);
       state.currentStageId = stageId;
       state.qIndex = 0;
-      state.hearts = 3;
+      state.hearts = 2;
       state.streak = 0;
       state.stageScore = 0;
       state.correctCount = 0;
@@ -469,7 +661,6 @@
     function loadQuestion() {
       clearInterval(state.timerInterval);
       const stage = STAGES.find(s => s.id === state.currentStageId);
-      const qObj = stage.questions[state.qIndex];
       state.answered = false;
       state.hiddenOptions = [];
       state.showHintBox = false;
@@ -491,7 +682,7 @@
         }
         if (state.timer <= 0) {
           clearInterval(state.timerInterval);
-          handleAnswer(-1); // Time out
+          handleAnswer(-1);
         }
       }, 1000);
     }
@@ -501,16 +692,16 @@
       const qObj = stage.questions[state.qIndex];
       const letters = ['A', 'B', 'C', 'D'];
 
-      const heartsHtml = [1, 2, 3].map(h => 
-        `<span class="text-base sm:text-lg ${h <= state.hearts ? 'opacity-100' : 'opacity-25 grayscale'}">❤️</span>`
+      const heartsHtml = [1, 2].map(h => 
+        `<span class="text-base ${h <= state.hearts ? 'opacity-100' : 'opacity-25 grayscale'}">❤️</span>`
       ).join('');
 
       const optionsHtml = qObj.options.map((opt, idx) => {
         if (state.hiddenOptions.includes(idx)) {
-          return `<div class="p-4 rounded-2xl border border-slate-800/50 bg-slate-900/30 text-slate-600 text-sm italic">Eliminated (50:50)</div>`;
+          return `<div class="p-3.5 rounded-2xl border border-slate-800/50 bg-slate-950/40 text-slate-600 text-sm italic">Eliminated via 50:50</div>`;
         }
-        let btnStyle = "bg-slate-900/80 border-slate-700/80 text-slate-100";
-        let badgeStyle = "bg-slate-800 text-cyan-400";
+        let btnStyle = "bg-slate-950/85 border-slate-800 text-slate-100";
+        let badgeStyle = "bg-slate-900 text-amber-400 border border-amber-500/30";
 
         if (state.answered) {
           if (idx === qObj.correct) {
@@ -520,7 +711,7 @@
             btnStyle = "bg-rose-950/90 border-rose-500 text-rose-100 animate-shake";
             badgeStyle = "bg-rose-500 text-white";
           } else {
-            btnStyle = "bg-slate-900/40 border-slate-800 text-slate-500";
+            btnStyle = "bg-slate-950/40 border-slate-800/60 text-slate-500";
           }
         }
 
@@ -536,57 +727,57 @@
       }).join('');
 
       app.innerHTML = `
-        <div class="glass-card rounded-3xl p-5 sm:p-7 animate-pop">
+        <div class="luxury-card rounded-3xl p-5 sm:p-7 animate-pop">
           <!-- Top HUD -->
           <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-slate-800">
             <div class="flex items-center gap-2">
-              <button onclick="renderMap()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-lg">✕ Exit</button>
-              <span class="text-xs font-bold text-cyan-400 bg-cyan-950/70 px-3 py-1 rounded-lg border border-cyan-500/20">
-                ${stage.title.split(':')[0]} • Q ${state.qIndex + 1}/${stage.questions.length}
+              <button onclick="renderMap()" class="text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 px-2.5 py-1.5 rounded-lg border border-slate-700">✕ Exit</button>
+              <span class="text-xs font-bold text-amber-300 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-400/25">
+                ${stage.title.split(':')[0]} • Case ${state.qIndex + 1}/${stage.questions.length}
               </span>
             </div>
 
             <div class="flex items-center gap-3">
-              ${state.streak >= 2 ? `<span class="text-xs font-black text-amber-400 bg-amber-500/15 px-2.5 py-1 rounded-lg">🔥 ${state.streak}x Streak</span>` : ''}
+              ${state.streak >= 2 ? `<span class="text-xs font-black text-amber-400 bg-amber-500/15 px-2.5 py-1 rounded-lg">🔥 ${state.streak}x</span>` : ''}
               <div class="flex items-center gap-0.5">${heartsHtml}</div>
-              <div class="text-xs font-black px-2.5 py-1 rounded-lg ${state.timeFrozen ? 'bg-sky-500/20 text-sky-300' : 'bg-slate-800 text-white'}">
+              <div class="text-xs font-black px-2.5 py-1 rounded-lg ${state.timeFrozen ? 'bg-sky-500/20 text-sky-300' : 'bg-slate-900 text-white border border-slate-700'}">
                 ⏱️ <span id="timerText">${state.timeFrozen ? 'Frozen' : state.timer + 's'}</span>
               </div>
             </div>
           </div>
 
           <!-- Timer Progress Bar -->
-          <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden mb-5">
-            <div id="timerBar" class="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 transition-all duration-300" style="width: ${(state.timer / stage.timePerQ) * 100}%"></div>
+          <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden mb-5">
+            <div id="timerBar" class="h-full bg-gradient-to-r from-amber-400 to-sky-400 transition-all duration-300" style="width: ${(state.timer / stage.timePerQ) * 100}%"></div>
           </div>
 
           <!-- Question Text -->
-          <h3 class="text-lg sm:text-xl font-extrabold text-white leading-relaxed mb-5">
+          <h3 class="text-base sm:text-lg font-extrabold text-white leading-relaxed mb-5">
             ${qObj.q}
           </h3>
 
           <!-- Lifelines Bar -->
-          <div class="flex items-center gap-2 mb-5">
-            <span class="text-xs text-slate-400 font-semibold mr-1">Lifelines:</span>
+          <div class="flex flex-wrap items-center gap-2 mb-5">
+            <span class="text-xs text-slate-400 font-semibold mr-1">Consultations:</span>
             <button onclick="useFiftyFifty()" ${!state.lifelines.fifty || state.answered ? 'disabled' : ''} 
-                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.fifty && !state.answered ? 'bg-indigo-950/80 border-indigo-500/40 text-indigo-300 hover:bg-indigo-900' : 'bg-slate-900 border-slate-800 text-slate-600 cursor-not-allowed'}">
+                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.fifty && !state.answered ? 'bg-sky-950/80 border-sky-500/40 text-sky-300 hover:bg-sky-900' : 'bg-slate-950 border-slate-800 text-slate-600 cursor-not-allowed'}">
               ✂️ 50:50
             </button>
             <button onclick="useHint()" ${!state.lifelines.hint || state.answered ? 'disabled' : ''} 
-                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.hint && !state.answered ? 'bg-amber-950/80 border-amber-500/40 text-amber-300 hover:bg-amber-900' : 'bg-slate-900 border-slate-800 text-slate-600 cursor-not-allowed'}">
-              💡 Hint
+                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.hint && !state.answered ? 'bg-amber-950/80 border-amber-500/40 text-amber-300 hover:bg-amber-900' : 'bg-slate-950 border-slate-800 text-slate-600 cursor-not-allowed'}">
+              💡 Faculty Clue
             </button>
             <button onclick="useFreeze()" ${!state.lifelines.freeze || state.answered ? 'disabled' : ''} 
-                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.freeze && !state.answered ? 'bg-sky-950/80 border-sky-500/40 text-sky-300 hover:bg-sky-900' : 'bg-slate-900 border-slate-800 text-slate-600 cursor-not-allowed'}">
-              ❄️ Freeze
+                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.freeze && !state.answered ? 'bg-indigo-950/80 border-indigo-500/40 text-indigo-300 hover:bg-indigo-900' : 'bg-slate-950 border-slate-800 text-slate-600 cursor-not-allowed'}">
+              ❄️ Freeze Clock
             </button>
           </div>
 
           <!-- Optional Hint Box -->
           ${state.showHintBox ? `
-            <div class="mb-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-400/30 text-amber-200 text-xs sm:text-sm flex items-start gap-2.5 animate-pop">
+            <div class="mb-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-400/35 text-amber-200 text-xs sm:text-sm flex items-start gap-2.5 animate-pop">
               <span class="text-base">💡</span>
-              <div><strong>Clinical Clue:</strong> ${qObj.hint}</div>
+              <div><strong>Pharmacology Clue:</strong> ${qObj.hint}</div>
             </div>
           ` : ''}
 
@@ -595,31 +786,30 @@
             ${optionsHtml}
           </div>
 
-          <!-- Immediate Scientific Explanation Card -->
+          <!-- Clinical Rationale Card -->
           ${state.answered ? `
-            <div class="p-4 rounded-2xl ${selectedIdx === qObj.correct ? 'bg-emerald-950/60 border-emerald-500/40' : 'bg-rose-950/60 border-rose-500/40'} border mb-4 animate-pop">
+            <div class="p-4 rounded-2xl ${selectedIdx === qObj.correct ? 'bg-emerald-950/65 border-emerald-500/40' : 'bg-rose-950/65 border-rose-500/40'} border mb-4 animate-pop">
               <div class="font-black text-sm mb-1 ${selectedIdx === qObj.correct ? 'text-emerald-300' : 'text-rose-300'}">
-                ${selectedIdx === qObj.correct ? '✅ Spot On! Clinical Pearl:' : (selectedIdx === -1 ? '⏰ Time Expired! Clinical Pearl:' : '❌ Incorrect — Clinical Pearl:')}
+                ${selectedIdx === qObj.correct ? '✅ Verified Clinical Answer:' : (selectedIdx === -1 ? '⏰ Time Expired — Clinical Rationale:' : '❌ Incorrect — Clinical Rationale:')}
               </div>
               <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${qObj.explanation}</p>
             </div>
-            <button onclick="nextStep()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-base shadow-lg transition">
-              ${state.hearts <= 0 ? 'View Stage Summary →' : (state.qIndex + 1 < stage.questions.length ? 'Next Question →' : 'Finish Stage 🏆')}
+            <button onclick="nextStep()" class="gold-btn w-full py-3.5 rounded-2xl font-black text-base transition">
+              ${state.hearts <= 0 ? 'View Module Evaluation →' : (state.qIndex + 1 < stage.questions.length ? 'Next Clinical Case →' : 'Complete Module 🏆')}
             </button>
           ` : ''}
         </div>
       `;
     }
 
-    // --- Lifelines Handlers ---
+    // --- Lifelines ---
     function useFiftyFifty() {
       if (!state.lifelines.fifty || state.answered) return;
       sfx.click();
       state.lifelines.fifty = false;
       const stage = STAGES.find(s => s.id === state.currentStageId);
       const correctIdx = stage.questions[state.qIndex].correct;
-      const wrongIndices = [0, 1, 2, 3].filter(i => i !== correctIdx);
-      wrongIndices.sort(() => Math.random() - 0.5);
+      const wrongIndices = [0, 1, 2, 3].filter(i => i !== correctIdx).sort(() => Math.random() - 0.5);
       state.hiddenOptions = wrongIndices.slice(0, 2);
       renderQuizUI();
     }
@@ -640,7 +830,7 @@
       renderQuizUI();
     }
 
-    // --- Answer Validation ---
+    // --- Answer Evaluation ---
     function handleAnswer(selectedIdx) {
       if (state.answered) return;
       state.answered = true;
@@ -653,9 +843,9 @@
         sfx.correct();
         state.streak++;
         state.correctCount++;
-        const speedBonus = Math.round(state.timer * 3);
-        const streakBonus = state.streak > 1 ? state.streak * 15 : 0;
-        const points = 100 + speedBonus + streakBonus;
+        const speedBonus = Math.round(state.timer * 4);
+        const streakBonus = state.streak > 1 ? state.streak * 20 : 0;
+        const points = 120 + speedBonus + streakBonus;
         state.stageScore += points;
         state.totalScore += points;
         updateHeader();
@@ -679,16 +869,17 @@
       }
     }
 
-    // --- Screen 4: Stage Summary ---
+    // --- Screen 4: Stage Result ---
     function renderStageResult() {
       clearInterval(state.timerInterval);
       const stage = STAGES.find(s => s.id === state.currentStageId);
-      const passed = state.hearts > 0 && state.correctCount >= 3;
+      // Hardcore passing requirement: >= 5 out of 6 correct
+      const passed = state.hearts > 0 && state.correctCount >= 5;
 
       let stars = 0;
       if (passed) {
         sfx.win();
-        stars = state.correctCount === 5 ? 3 : (state.correctCount === 4 ? 2 : 1);
+        stars = state.correctCount === 6 ? 3 : 2;
         const prevStars = state.completedStages[stage.id] || 0;
         if (stars > prevStars) state.completedStages[stage.id] = stars;
         if (stage.id === state.unlockedStage && state.unlockedStage < STAGES.length) {
@@ -699,17 +890,18 @@
       }
 
       const hasNextStage = passed && stage.id < STAGES.length;
+      const allCleared = Object.keys(state.completedStages).length === STAGES.length;
 
       app.innerHTML = `
-        <div class="glass-card rounded-3xl p-6 sm:p-10 text-center animate-pop max-w-xl mx-auto">
+        <div class="luxury-card rounded-3xl p-6 sm:p-10 text-center animate-pop max-w-xl mx-auto">
           <div class="text-5xl mb-3">${passed ? '🏆' : '💔'}</div>
           <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">
-            ${passed ? 'Stage Cleared!' : 'Out of Hearts!'}
+            ${passed ? 'Module Passed!' : 'Module Not Passed'}
           </h2>
           <p class="text-sm text-slate-300 mb-6">
             ${passed 
-              ? `Great clinical reasoning in ${stage.title}.` 
-              : 'Review the clinical pearls and try again to unlock the next stage.'}
+              ? `Excellent clinical judgment in ${stage.title}.` 
+              : 'Board Standard: You must answer at least 5/6 cases correctly without losing both lives.'}
           </p>
 
           <div class="flex justify-center gap-2 text-3xl mb-6">
@@ -717,35 +909,80 @@
           </div>
 
           <div class="grid grid-cols-2 gap-3 mb-7">
-            <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl">
-              <div class="text-xs text-slate-400 mb-1">Correct Answers</div>
-              <div class="text-xl font-black text-emerald-400">${state.correctCount} / ${stage.questions.length}</div>
+            <div class="bg-slate-950/90 border border-slate-800 p-4 rounded-2xl">
+              <div class="text-xs text-slate-400 mb-1">Cases Solved</div>
+              <div class="text-xl font-black ${passed ? 'text-emerald-400' : 'text-rose-400'}">${state.correctCount} / ${stage.questions.length}</div>
             </div>
-            <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl">
-              <div class="text-xs text-slate-400 mb-1">Stage Points</div>
+            <div class="bg-slate-950/90 border border-slate-800 p-4 rounded-2xl">
+              <div class="text-xs text-slate-400 mb-1">Module Score</div>
               <div class="text-xl font-black text-amber-400">+${state.stageScore}</div>
             </div>
           </div>
 
           <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <button onclick="startStage(${stage.id})" class="px-6 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-700 transition">
-              Replay Stage ↻
+            <button onclick="startStage(${stage.id})" class="px-6 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm border border-slate-700 transition">
+              Retry Module ↻
             </button>
-            ${hasNextStage ? `
-              <button onclick="startStage(${stage.id + 1})" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-sm shadow-lg transition">
-                Next Stage →
+            ${allCleared ? `
+              <button onclick="renderCertificate()" class="gold-btn px-8 py-3.5 rounded-2xl font-black text-sm transition">
+                Claim MNU Certificate 📜
+              </button>
+            ` : (hasNextStage ? `
+              <button onclick="startStage(${stage.id + 1})" class="gold-btn px-8 py-3.5 rounded-2xl font-black text-sm transition">
+                Next Module →
               </button>
             ` : `
-              <button onclick="renderMap()" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-sm shadow-lg transition">
-                Back to Stage Map 🗺️
+              <button onclick="renderMap()" class="gold-btn px-8 py-3.5 rounded-2xl font-black text-sm transition">
+                Back to Modules 🗺️
               </button>
-            `}
+            `)}
           </div>
         </div>
       `;
     }
 
-    // Boot Game
+    // --- Screen 5: Official MNU Completion Certificate ---
+    function renderCertificate() {
+      sfx.win();
+      app.innerHTML = `
+        <div class="luxury-card rounded-3xl p-6 sm:p-10 text-center animate-pop max-w-3xl mx-auto border-2 border-amber-400/60">
+          <div class="flex items-center justify-center gap-4 mb-5">
+            <img src="mnu-logo.jpg" alt="MNU" onerror="this.style.display='none'" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover logo-ring">
+            <img src="pharmacy-logo.jpg" alt="Pharmacy" onerror="this.style.display='none'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover logo-ring">
+            <img src="pharma-dept-logo.jpg" alt="Pharmacology" onerror="this.style.display='none'" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover logo-ring">
+          </div>
+
+          <div class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">
+            Mansoura National University • Faculty of Pharmacy
+          </div>
+          <div class="text-xs text-sky-300 font-semibold mb-4">
+            Department of Pharmacology & Toxicology
+          </div>
+
+          <h2 class="font-royal text-2xl sm:text-4xl font-black text-white mb-3">
+            CERTIFICATE OF CLINICAL MASTERY
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 mb-3">This certifies that</p>
+          <div class="text-2xl sm:text-3xl font-black text-amber-300 border-b border-amber-400/40 inline-block px-8 pb-2 mb-4">
+            ${state.playerName}
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed mb-6">
+            has successfully completed all <strong>6 Advanced Clinical Modules (36 Board Cases)</strong> in <em>Insulin Pharmacotherapy, ICU Crises & Toxicology</em> with a cumulative score of <strong class="text-amber-300">${state.totalScore} points</strong>.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="window.print()" class="gold-btn px-7 py-3 rounded-xl font-black text-sm">
+              🖨️ Print / Save Certificate
+            </button>
+            <button onclick="renderMap()" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-sm border border-slate-700">
+              Back to Modules
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Boot
     updateHeader();
     renderHome();
   </script>
