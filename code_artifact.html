@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تحدي الأنسولين - رحلة الصيدلي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+        }
+        body {
+            background-color: #060b14;
+            color: #f1f5f9;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 45%),
+                linear-gradient(to bottom, #060b14, #0b1324);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+        }
+        .stage-card {
+            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .stage-card:not(.locked):hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(34, 211, 238, 0.65);
+            box-shadow: 0 14px 32px rgba(6, 182, 212, 0.22);
+        }
+        .option-btn {
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover:not(:disabled) {
+            transform: translateX(-4px);
+            background: rgba(30, 41, 59, 0.95);
+            border-color: #38bdf8;
+        }
+        .option-btn:active:not(:disabled) {
+            transform: scale(0.985);
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+        }
+        .animate-shake {
+            animation: shake 0.42s ease-in-out;
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .pop-in {
+            animation: popIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 22px 4px rgba(16, 185, 129, 0.25); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- الشريط العلوي الدائم (Header / Top Bar) -->
+    <header class="w-full border-b border-slate-800/80 bg-slate-950/75 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-2">
+            <!-- شعار اللعبة -->
+            <div class="flex items-center gap-2.5 cursor-pointer" id="home-logo-btn" title="العودة لخريطة الأدوار">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-xl shadow-lg shadow-cyan-500/20">
+                    💉
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-black text-white leading-tight">تحدي الأنسولين</h1>
+                    <p class="text-[11px] text-cyan-400 font-semibold">رحلة الصيدلي الإكلينيكي</p>
+                </div>
+            </div>
+
+            <!-- إحصائيات اللاعب (XP، الرتبة، الصوت) -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="hidden sm:flex items-center gap-1.5 bg-slate-900 border border-slate-700/80 px-3 py-1.5 rounded-xl">
+                    <span class="text-xs text-slate-400">الرتبة:</span>
+                    <span id="player-rank-badge" class="text-xs font-extrabold text-emerald-400">متدرب صيدلة</span>
+                </div>
+
+                <div class="flex items-center gap-1.5 bg-slate-900 border border-amber-500/30 px-3 py-1.5 rounded-xl">
+                    <span class="text-sm">⚡</span>
+                    <span id="total-xp-display" class="text-sm font-black text-amber-400 tabular-nums">0</span>
+                    <span class="text-[11px] text-slate-400 font-bold">XP</span>
+                </div>
+
+                <button id="sound-toggle-btn" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-cyan-400 transition" title="تشغيل/كتم الصوت">
+                    <span id="sound-icon" class="text-base">🔊</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي المتغير حسب الشاشة -->
+    <main class="flex-1 w-full max-w-5xl mx-auto px-3 sm:px-6 py-5 sm:py-8 flex flex-col justify-center">
+
+        <!-- 1. شاشة الترحيب (Welcome Screen) -->
+        <section id="welcome-screen" class="glass-card rounded-3xl p-6 sm:p-10 text-center max-w-2xl mx-auto pop-in">
+            <div class="w-20 h-20 mx-auto mb-5 rounded-3xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-emerald-500 flex items-center justify-center text-4xl shadow-xl shadow-cyan-500/25">
+                🧬
+            </div>
+            <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold mb-3">
+                لعبة تعليمية تفاعلية في الفسيولوجيا والفارماكولوجي
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-black text-white mb-3 leading-snug">
+                أهلاً بك في <span class="text-transparent bg-clip-text bg-gradient-to-l from-cyan-300 to-emerald-400">تحدي الأنسولين</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 mb-7 leading-relaxed">
+                اختبر مهارتك الصيدلانية والطبية عبر <strong class="text-white">4 أدوار متدرجة</strong> تبدأ من فسيولوجيا البنكرياس، مروراً بأنواع الأنسولين وحركيته الدوائية، وصولاً إلى إدارة الطوارئ الإكلينيكية وتحدي الزعيم الخبير!
+            </p>
+
+            <div class="grid grid-cols-3 gap-2.5 sm:gap-4 mb-8 text-center">
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-2xl mb-1">🗺️</div>
+                    <div class="text-xs sm:text-sm font-extrabold text-cyan-300">4 أدوار متدرجة</div>
+                    <div class="text-[11px] text-slate-400">20 سؤالاً وحالة</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-2xl mb-1">🧰</div>
+                    <div class="text-xs sm:text-sm font-extrabold text-amber-300">وسائل مساعدة</div>
+                    <div class="text-[11px] text-slate-400">50:50 • تلميح • تجميد</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-2xl mb-1">💡</div>
+                    <div class="text-xs sm:text-sm font-extrabold text-emerald-300">شرح علمي فوري</div>
+                    <div class="text-[11px] text-slate-400">معلومة إكلينيكية بعد كل سؤال</div>
+                </div>
+            </div>
+
+            <button id="enter-map-btn" class="w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-lg shadow-lg shadow-cyan-500/25 transition transform hover:scale-105 cursor-pointer">
+                ابدأ الرحلة وافتح خريطة الأدوار 🚀
+            </button>
+        </section>
+
+        <!-- 2. شاشة خريطة الأدوار والمراحل (Stage Map Screen) -->
+        <section id="map-screen" class="hidden pop-in">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">خريطة الأدوار والمستويات 🗺️</h2>
+                    <p class="text-xs sm:text-sm text-slate-400">أكمل كل دور بنجاح (60% على الأقل) لفتح الدور التالي وجمع النجوم!</p>
+                </div>
+                <div class="glass-card px-4 py-2 rounded-2xl flex items-center gap-3 self-start sm:self-auto">
+                    <span class="text-xs text-slate-300 font-bold">مجموع النجوم:</span>
+                    <span id="total-stars-display" class="text-base font-black text-amber-400">0 / 12 ⭐</span>
+                </div>
+            </div>
+
+            <!-- شبكة الأدوار الأربعة -->
+            <div id="stages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                <!-- يتم توليد البطاقات ديناميكياً عبر JS -->
+            </div>
+
+            <!-- زر عرض الشهادة / النتيجة النهائية عند إتمام كل الأدوار -->
+            <div id="final-ceremony-banner" class="hidden mt-6 glass-card border-emerald-500/50 rounded-3xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 pulse-glow">
+                <div class="flex items-center gap-3 text-right">
+                    <span class="text-4xl">🏆</span>
+                    <div>
+                        <h3 class="text-lg font-black text-emerald-300">مبارك! لقد أتممت جميع أدوار تحدي الأنسولين</h3>
+                        <p class="text-xs sm:text-sm text-slate-300">يمكنك الآن استعراض تقريرك النهائي ورتبتك الصيدلانية أو إعادة تحسين نجومك.</p>
+                    </div>
+                </div>
+                <button id="view-final-report-btn" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm shrink-0 cursor-pointer">
+                    عرض التقرير والرتبة 🎖️
+                </button>
+            </div>
+        </section>
+
+        <!-- 3. شاشة اللعب والأسئلة (Quiz Gameplay Screen) -->
+        <section id="quiz-screen" class="hidden pop-in max-w-3xl mx-auto w-full">
+            <!-- شريط حالة الدور الحالي (القلوب، المؤقت، التقدم، التتابع) -->
+            <div class="glass-card rounded-2xl p-3.5 sm:p-4 mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <button id="quit-stage-btn" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 font-bold cursor-pointer">
+                        ✕ خروج
+                    </button>
+                    <div>
+                        <div id="current-stage-title" class="text-xs sm:text-sm font-extrabold text-cyan-300">الدور الأول</div>
+                        <div class="text-[11px] text-slate-400 font-semibold">
+                            السؤال <span id="question-number" class="text-white font-bold">1</span> من <span id="total-questions">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القلوب (الأرواح) وسلسلة الإجابات -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <div id="streak-pill" class="hidden bg-amber-500/20 border border-amber-400/40 text-amber-300 px-2.5 py-1 rounded-xl text-xs font-black">
+                        🔥 تتابع ×<span id="streak-count">2</span>
+                    </div>
+
+                    <div id="hearts-container" class="flex items-center gap-1 text-lg sm:text-xl" title="الأرواح المتبقية">
+                        <span>❤️</span><span>❤️</span><span>❤️</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شريط الوقت التنازلي والتقدم -->
+            <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden mb-5 border border-slate-700/80 relative">
+                <div id="timer-bar" class="h-full bg-gradient-to-l from-cyan-400 to-emerald-400 transition-all duration-200" style="width: 100%;"></div>
+            </div>
+
+            <!-- بطاقة السؤال والخيارات -->
+            <div id="question-card" class="glass-card rounded-3xl p-5 sm:p-8 mb-4">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                    <span id="question-category-tag" class="text-[11px] font-bold px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                        فسيولوجيا البنكرياس
+                    </span>
+                    <span id="timer-text" class="text-xs font-black text-slate-300 bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-700 tabular-nums">
+                        ⏱️ 25 ثانية
+                    </span>
+                </div>
+
+                <h3 id="question-text" class="text-lg sm:text-2xl font-extrabold text-white leading-relaxed mb-6">
+                    نص السؤال يظهر هنا...
+                </h3>
+
+                <!-- صندوق التلميح العلمي (يظهر عند استخدام وسيلة المساعدة) -->
+                <div id="hint-box" class="hidden mb-5 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-400/40 text-amber-200 text-xs sm:text-sm flex items-start gap-2.5">
+                    <span class="text-lg">💡</span>
+                    <div>
+                        <strong class="font-extrabold text-amber-300">استشارة سريعة: </strong>
+                        <span id="hint-text"></span>
+                    </div>
+                </div>
+
+                <!-- قائمة الخيارات الأربعة -->
+                <div id="options-container" class="grid grid-cols-1 gap-3">
+                    <!-- يتم توليد الأزرار ديناميكياً -->
+                </div>
+
+                <!-- بطاقة التفسير العلمي الفوري بعد الإجابة -->
+                <div id="explanation-box" class="hidden mt-6 p-4 sm:p-5 rounded-2xl border pop-in">
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span id="explanation-icon" class="text-xl">✅</span>
+                        <h4 id="explanation-heading" class="text-sm sm:text-base font-black">إجابة صحيحة!</h4>
+                    </div>
+                    <p id="explanation-text" class="text-xs sm:text-sm text-slate-200 leading-relaxed mb-4">
+                        الشرح العلمي يظهر هنا...
+                    </p>
+                    <button id="next-question-btn" class="w-full sm:w-auto px-7 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-sm transition cursor-pointer">
+                        السؤال التالي ⬅️
+                    </button>
+                </div>
+            </div>
+
+            <!-- شريط وسائل المساعدة (Lifelines) -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-3">
+                <button id="lifeline-5050" class="glass-card hover:border-cyan-400/60 p-2.5 sm:p-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                    <span class="text-lg sm:text-xl">✂️</span>
+                    <div class="text-right">
+                        <div class="text-xs font-extrabold text-cyan-300">حذف إجابتين</div>
+                        <div class="text-[10px] text-slate-400">50:50 (<span id="count-5050">2</span>)</div>
+                    </div>
+                </button>
+
+                <button id="lifeline-hint" class="glass-card hover:border-amber-400/60 p-2.5 sm:p-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                    <span class="text-lg sm:text-xl">🩺</span>
+                    <div class="text-right">
+                        <div class="text-xs font-extrabold text-amber-300">تلميح علمي</div>
+                        <div class="text-[10px] text-slate-400">استشارة (<span id="count-hint">2</span>)</div>
+                    </div>
+                </button>
+
+                <button id="lifeline-freeze" class="glass-card hover:border-emerald-400/60 p-2.5 sm:p-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                    <span class="text-lg sm:text-xl">❄️</span>
+                    <div class="text-right">
+                        <div class="text-xs font-extrabold text-emerald-300">تجميد الوقت</div>
+                        <div class="text-[10px] text-slate-400">+15 ثانية (<span id="count-freeze">2</span>)</div>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- 4. شاشة نتيجة الدور (Stage Result Modal / Screen) -->
+        <section id="stage-result-screen" class="hidden glass-card rounded-3xl p-6 sm:p-9 text-center max-w-xl mx-auto pop-in">
+            <div id="stage-result-icon" class="text-5xl mb-3">🌟</div>
+            <h2 id="stage-result-title" class="text-2xl sm:text-3xl font-black text-white mb-1">أتممت الدور بنجاح!</h2>
+            <p id="stage-result-subtitle" class="text-sm text-slate-300 mb-5">أداء رائع في فهم أساسيات الأنسولين.</p>
+
+            <!-- النجوم المكتسبة -->
+            <div id="stage-stars-earned" class="flex justify-center gap-2 text-4xl mb-6">
+                <span>⭐</span><span>⭐</span><span>⭐</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5 mb-7">
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-[11px] text-slate-400">الإجابات الصحيحة</div>
+                    <div id="stage-correct-stat" class="text-xl font-black text-emerald-400">5 / 5</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-[11px] text-slate-400">نقاط الخبرة (XP)</div>
+                    <div id="stage-xp-stat" class="text-xl font-black text-amber-400">+250</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-[11px] text-slate-400">أعلى تتابع</div>
+                    <div id="stage-streak-stat" class="text-xl font-black text-cyan-400">×4</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button id="retry-stage-btn" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-600 cursor-pointer">
+                    إعادة الدور 🔄
+                </button>
+                <button id="next-stage-btn" class="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-sm shadow-lg cursor-pointer">
+                    الانتقال للدور التالي 🚀
+                </button>
+            </div>
+        </section>
+
+        <!-- 5. شاشة التخرج والرتبة النهائية (Final Graduation Screen) -->
+        <section id="final-screen" class="hidden glass-card rounded-3xl p-6 sm:p-10 text-center max-w-2xl mx-auto pop-in">
+            <div class="text-6xl mb-3">🎓</div>
+            <span class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold mb-2">
+                شهادة إتمام رحلة الصيدلي
+            </span>
+            <h2 id="final-rank-title" class="text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-l from-amber-300 via-emerald-300 to-cyan-300 mb-2">
+                خبير الغدد الصماء والأنسولين
+            </h2>
+            <p class="text-sm text-slate-300 mb-6">
+                لقد اجتزت جميع التحديات الفسيولوجية والإكلينيكية بنجاح باهر!
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7">
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-[11px] text-slate-400">مجموع XP</div>
+                    <div id="grand-xp" class="text-xl font-black text-amber-400">0</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-[11px] text-slate-400">النجوم</div>
+                    <div id="grand-stars" class="text-xl font-black text-yellow-400">12 / 12</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-[11px] text-slate-400">الدقة العلمية</div>
+                    <div id="grand-accuracy" class="text-xl font-black text-emerald-400">100%</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl">
+                    <div class="text-[11px] text-slate-400">الأدوار المكتملة</div>
+                    <div class="text-xl font-black text-cyan-400">4 / 4</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button id="back-to-map-from-final" class="w-full sm:w-auto px-7 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-600 cursor-pointer">
+                    العودة لخريطة الأدوار 🗺️
+                </button>
+                <button id="reset-all-game-btn" class="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-black text-sm cursor-pointer">
+                    بدء رحلة جديدة من الصفر 🔄
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /**
+         * محرك المؤثرات الصوتية المولد برمجياً عبر Web Audio API
+         */
+        class SoundFX {
+            constructor() {
+                this.ctx = null;
+                this.muted = false;
+            }
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioCtx();
+                }
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            }
+            toggle() {
+                this.muted = !this.muted;
+                return this.muted;
+            }
+            playCorrect() {
+                if (this.muted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                [523.25, 659.25, 783.99].forEach((freq, i) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.07);
+                    gain.gain.setValueAtTime(0.15, now + i * 0.07);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now + i * 0.07);
+                    osc.stop(now + i * 0.07 + 0.26);
+                });
+            }
+            playWrong() {
+                if (this.muted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(210, now);
+                osc.frequency.linearRampToValueAtTime(135, now + 0.28);
+                gain.gain.setValueAtTime(0.14, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.31);
+            }
+            playPowerup() {
+                if (this.muted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, now);
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.18);
+                gain.gain.setValueAtTime(0.14, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.21);
+            }
+            playVictory() {
+                if (this.muted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.09);
+                    gain.gain.setValueAtTime(0.16, now + i * 0.09);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.09 + 0.35);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now + i * 0.09);
+                    osc.stop(now + i * 0.09 + 0.36);
+                });
+            }
+        }
+
+        const sfx = new SoundFX();
+
+        /**
+         * قاعدة بيانات الأدوار والأسئلة العلمية (4 أدوار × 5 أسئلة = 20 سؤالاً)
+         */
+        const STAGES_DATA = [
+            {
+                id: 0,
+                badge: 'الدور الأول',
+                title: 'أساسيات الأنسولين والبنكرياس',
+                subtitle: 'فسيولوجيا خلايا بيتا، C-Peptide، وبوابات الجلوكوز',
+                icon: '🧬',
+                timePerQuestion: 28,
+                questions: [
+                    {
+                        category: 'فسيولوجيا البنكرياس',
+                        text: 'أي نوع من الخلايا داخل جزر لانغرهانس في البنكرياس هو المسؤول عن تصنيع وإفراز هرمون الأنسولين؟',
+                        options: [
+                            'خلايا ألفا (Alpha cells)',
+                            'خلايا بيتا (Beta cells)',
+                            'خلايا دلتا (Delta cells)',
+                            'خلايا أسينار (Acinar cells)'
+                        ],
+                        correct: 1,
+                        hint: 'تُشكل هذه الخلايا حوالي 65-80% من خلايا جزر لانغرهانس وتُدمّر مناعياً في السكري من النوع الأول.',
+                        explanation: 'تُفرز خلايا بيتا (Beta cells) هرمون الأنسولين استجابة لارتفاع جلوكوز الدم، بينما تفرز خلايا ألفا الجلوكاجون، وتفرز خلايا دلتا السوماتوستاتين.'
+                    },
+                    {
+                        category: 'التشخيص المخبري',
+                        text: 'ما الفائدة الإكلينيكية الأساسية لقياس مستوى (C-Peptide) في دم مريض السكري؟',
+                        options: [
+                            'قياس حساسية مستقبلات العضلات للأنسولين',
+                            'التمييز بين الأنسولين الداخلي الذي يفرزه البنكرياس والأنسولين المحقون خارجياً',
+                            'تقدير معدل السكر التراكمي لآخر 3 أشهر',
+                            'تشخيص الإصابة بالحماض الكيتوني السكري (DKA)'
+                        ],
+                        correct: 1,
+                        hint: 'ينفصل هذا الببتيد عن طليعة الأنسولين (Proinsulin) داخل البنكرياس، ولا يوجد في أقلام أو فيالات الأنسولين الدوائية.',
+                        explanation: 'يُفرز C-Peptide بكميات متساوية مع الأنسولين الطبيعي من خلايا بيتا، وهو غير موجود في المستحضرات الدوائية، لذا يُعد مؤشراً دقيقاً على قدرة البنكرياس الذاتية على إفراز الأنسولين.'
+                    },
+                    {
+                        category: 'آلية العمل الخلوية',
+                        text: 'كيف يُدخل الأنسولين جزيئات الجلوكوز إلى داخل خلايا العضلات الهيكلية والأنسجة الدهنية؟',
+                        options: [
+                            'بتحفيز انتقال نواقل الجلوكوز (GLUT4) إلى سطح غشاء الخلية',
+                            'عن طريق تكسير الجليكوجين داخل مجرى الدم',
+                            'بغلق قنوات البوتاسيوم ومنع دخول الصوديوم',
+                            'بتحويل الأحماض الدهنية مباشرة إلى جلوكوز'
+                        ],
+                        correct: 0,
+                        hint: 'توجد هذه النواقل مخزنة في حويصلات داخل السيتوبلازم وتنتقل للغشاء البلازمي فور ارتباط الأنسولين بمستقبله.',
+                        explanation: 'يرتبط الأنسولين بمستقبلات Tyrosine Kinase على سطح الخلية، مما يحفز انتقال نواقل (GLUT4) إلى الغشاء الخلوي لتسمح بدخول الجلوكوز بكفاءة.'
+                    },
+                    {
+                        category: 'التوازن الهرموني',
+                        text: 'أي من التأثيرات الأيضية التالية يُعد من الوظائف البنائية (Anabolic) المباشرة للأنسولين في الكبد؟',
+                        options: [
+                            'تحفيز تكسير الجليكوجين (Glycogenolysis)',
+                            'تنشيط تكوين الجلوكوز من مصادر غير كربوهيدراتية (Gluconeogenesis)',
+                            'تحفيز تخزين الجلوكوز على هيئة جليكوجين (Glycogenesis) وتثبيط تحلل الدهون',
+                            'زيادة إنتاج الأجسام الكيتونية في الدم'
+                        ],
+                        correct: 2,
+                        hint: 'الأنسولين هو هرمون البناء والتخزين بعد تناول الطعام (Fed State).',
+                        explanation: 'يعمل الأنسولين كهرمون بناء رئيسي؛ حيث يحفز تخزين الجلوكوز كجليكوجين في الكبد والعضلات، ويثبط تحلل الدهون (Lipolysis) وتكوين الأجسام الكيتونية.'
+                    },
+                    {
+                        category: 'فسيولوجيا النقل الخلوي',
+                        text: 'أي عضو من أعضاء الجسم التالية يعتمد على دخول الجلوكوز بشكل مستمر دون الحاجة لوجود الأنسولين؟',
+                        options: [
+                            'العضلات الهيكلية أثناء الراحة',
+                            'الأنسجة الدهنية (Adipose tissue)',
+                            'الدماغ والجهاز العصبي المركزي (عبر GLUT1 و GLUT3)',
+                            'عضلة القلب بعد الوجبات'
+                        ],
+                        correct: 2,
+                        hint: 'هذا العضو الحيوي يحتاج إمداداً متواصلاً من الجلوكوز كمصدر رئيسي للطاقة حتى في حالات الصيام.',
+                        explanation: 'يعتمد الدماغ وكريات الدم الحمراء على نواقل (GLUT1 / GLUT3) المستقلة عن الأنسولين، ولذلك يؤدي هبوط سكر الدم الحاد إلى أعراض عصبية خطيرة فوراً.'
+                    }
+                ]
+            },
+            {
+                id: 1,
+                badge: 'الدور الثاني',
+                title: 'أنواع الأنسولين والحركية الدوائية',
+                subtitle: 'سريع المفعول، منتظم، متوسط، وطويل المفعول وقواعد الخلط',
+                icon: '💊',
+                timePerQuestion: 25,
+                questions: [
+                    {
+                        category: 'الحركية الدوائية (Pharmacokinetics)',
+                        text: 'أي من أنواع الأنسولين التالية يُصنف ضمن الأنسولين فائق السرعة (Rapid-Acting) ويُحقن قبل الوجبة بـ 0 إلى 15 دقيقة؟',
+                        options: [
+                            'أنسولين جلارجين (Insulin Glargine)',
+                            'أنسولين ليسبرو (Insulin Lispro) وأسبارت (Aspart)',
+                            'أنسولين إن بي إتش (NPH Insulin)',
+                            'أنسولين ديجلوديك (Insulin Degludec)'
+                        ],
+                        correct: 1,
+                        hint: 'يبدأ مفعول هذه الأنواع خلال 10-20 دقيقة وتصل ذروتها خلال ساعة إلى ساعتين.',
+                        explanation: 'أنسولين Lispro و Aspart و Glulisine هي نظائر سريعة المفعول (Rapid-acting) تمتص بسرعة من تحت الجلد لتغطي ارتفاع السكر بعد الوجبة مباشرة.'
+                    },
+                    {
+                        category: 'الأنسولين القاعدي (Basal)',
+                        text: 'ما الميزة الفارماكولوجية الأبرز لأنسولين جلارجين (Glargine - Lantus) وديجلوديك (Degludec - Tresiba)؟',
+                        options: [
+                            'لهما ذروة عمل حادة (Sharp Peak) بعد 4 ساعات من الحقن',
+                            'يوفران مستوى ثابتاً تقريباً بدون ذروة (Peakless) لمدة 24 إلى 42 ساعة',
+                            'يُعطيان عن طريق الوريد في حالات الطوارئ فقط',
+                            'يُخلطان في نفس السرنجة مع الأنسولين المنتظم (Regular)'
+                        ],
+                        correct: 1,
+                        hint: 'غياب الذروة يقلل بشكل ملحوظ من خطر حدوث هبوط السكر الليلي.',
+                        explanation: 'الأنسولين طويل المفعول (Glargine, Detemir, Degludec) يغطي الاحتياج القاعدي للجسم طوال اليوم دون ذروة حادة، ولا يجوز خلطه في نفس السرنجة مع أي أنسولين آخر.'
+                    },
+                    {
+                        category: 'قواعد السحب والخلط',
+                        text: 'عند الحاجة لسحب أنسولين منتظم صافي (Regular) وأنسولين معكر (NPH) في سرنجة واحدة، ما القاعدة الصحيحة؟',
+                        options: [
+                            'سحب المعكر (NPH) أولاً ثم الصافي (Regular)',
+                            'سحب الصافي (Regular) أولاً ثم المعكر (NPH) — "Clear before Cloudy"',
+                            'رج زجاجة الأنسولين الصافي بقوة قبل السحب',
+                            'لا يمكن خلطهما مطلقاً ويجب حقن كل منهما في يوم مختلف'
+                        ],
+                        correct: 1,
+                        hint: 'تذكر القاعدة الصيدلانية الشهيرة: الصافي قبل المعكر لمنع تلوث زجاجة الأنسولين السريع بالبروتامين.',
+                        explanation: 'القاعدة الذهبية هي "Clear before Cloudy" (الصافي Regular أولاً ثم المعكر NPH) حتى لا ينتقل البروتامين الموجود في NPH إلى زجاجة Regular ويُبطئ مفعولها.'
+                    },
+                    {
+                        category: 'الأنسولين الوريدي',
+                        text: 'أي نوع من الأنسولين هو الوحيد الذي يُسمح بإعطائه عن طريق الوريد (IV) في المستشفيات وحالات الطوارئ؟',
+                        options: [
+                            'الأنسولين المنتظم الصافي (Regular Human Insulin)',
+                            'أنسولين NPH المعكر',
+                            'أنسولين ديتيمير (Detemir)',
+                            'الأنسولين المختلط (Premixed 70/30)'
+                        ],
+                        correct: 0,
+                        hint: 'المحاليل الوريدية يجب أن تكون صافية تماماً وخالية من أي معلقات أو بلورات.',
+                        explanation: 'الأنسولين المنتظم (Regular) هو النوع القياسي المعتمد للحقن الوريدي المستمر (IV Infusion) في حالات DKA والعمليات الجراحية والعناية المركزة.'
+                    },
+                    {
+                        category: 'الأنسولين متوسط المفعول',
+                        text: 'متى تصل ذروة عمل (Peak) أنسولين NPH المعكر بعد حقنه تحت الجلد، مما يتطلب انتباه المريض لخطر هبوط السكر؟',
+                        options: [
+                            'بعد 15 دقيقة من الحقن',
+                            'بعد 4 إلى 12 ساعة من الحقن',
+                            'بعد 24 ساعة من الحقن',
+                            'ليس له ذروة عمل على الإطلاق'
+                        ],
+                        correct: 1,
+                        hint: 'إذا حُقن NPH صباحاً، فإن ذروته غالباً ما تحدث في فترة الظهيرة أو العصر.',
+                        explanation: 'يبدأ مفعول NPH خلال 1-2 ساعة، وتصل ذروته بين 4 إلى 12 ساعة، ويستمر مفعوله حتى 18 ساعة، لذا يجب تناول وجبات منتظمة لتجنب الهبوط وقت الذروة.'
+                    }
+                ]
+            },
+            {
+                id: 2,
+                badge: 'الدور الثالث',
+                title: 'الحالات الإكلينيكية والطوارئ',
+                subtitle: 'قاعدة 15، الحماض الكيتوني DKA، ظاهرة الفجر، ومناطق الحقن',
+                icon: '🚑',
+                timePerQuestion: 24,
+                questions: [
+                    {
+                        category: 'إدارة هبوط السكر (Hypoglycemia)',
+                        text: 'مريض سكري واعٍ وقادر على البلع قاس سكره فوجده 58 mg/dL مع تعرق ورعشة. ما التطبيق الصحيح لـ "قاعدة 15" (Rule of 15)؟',
+                        options: [
+                            'حقن 15 وحدة أنسولين سريع فوراً',
+                            'تناول 15 جرام كربوهيدرات سريعة الامتصاص (مثل نصف كوب عصير) وإعادة القياس بعد 15 دقيقة',
+                            'تناول قطعة شوكولاتة دسمة والانتظار ساعتين',
+                            'شرب لتر من الماء الدافئ بدون سكريات'
+                        ],
+                        correct: 1,
+                        hint: 'الدهون في الشوكولاتة تُبطئ امتصاص السكر، لذا نحتاج كربوهيدرات بسيطة سريعة.',
+                        explanation: 'تُطبق قاعدة 15-15 بإعطاء 15 جرام من الجلوكوز أو العصير الصافي، ثم إعادة الفحص بعد 15 دقيقة، وتكرار الجرعة إذا ظل السكر أقل من 70 mg/dL.'
+                    },
+                    {
+                        category: 'طوارئ السكري (DKA)',
+                        text: 'في بروتوكول علاج الحماض الكيتوني السكري (DKA)، ما هي الخطوة الأولى الأهم قبل البدء بضخ الأنسولين الوريدي؟',
+                        options: [
+                            'إعطاء بيكربونات الصوديوم فوراً لجميع المرضى',
+                            'تعويض السوائل الوريدية (Normal Saline) وفحص مستوى البوتاسيوم في الدم',
+                            'حقن أنسولين جلارجين طويل المفعول تحت الجلد',
+                            'إعطاء مدرات البول لتخفيض السكر'
+                        ],
+                        correct: 1,
+                        hint: 'الأنسولين يدفع البوتاسيوم إلى داخل الخلايا؛ فإذا كان البوتاسيوم منخفضاً أصلاً فقد يحدث توقف في القلب!',
+                        explanation: 'الأولوية الأولى في DKA هي تعويض السوائل الوريدية لعلاج الجفاف الشديد، والتأكد من أن مستوى البوتاسيوم ≥ 3.3 mEq/L قبل بدء الأنسولين لتجنب نقص البوتاسيوم القاتل.'
+                    },
+                    {
+                        category: 'التشخيص التفريقي الصباحي',
+                        text: 'مريض يستيقظ يومياً بسكر صائم مرتفع (195 mg/dL). كشف القياس الساعة 3 فجراً هبوطاً حاداً في السكر (52 mg/dL). ما تفسير هذه الحالة؟',
+                        options: [
+                            'ظاهرة الفجر (Dawn Phenomenon)',
+                            'تأثير سوموجي (Somogyi Effect) — ارتفاع ارتدادي نتيجة جرعة أنسولين مسائية زائدة',
+                            'حساسية مفرطة تجاه الكربوهيدرات الصباحية',
+                            'تلف شرائط قياس السكر فقط'
+                        ],
+                        correct: 1,
+                        hint: 'هبوط السكر ليلاً يحفز الجسم لإفراز هرمونات التوتر (الأدرينالين والكورتيزول والجلوكاجون) فترفع السكر صباحاً.',
+                        explanation: 'تأثير سوموجي (Somogyi Effect) هو ارتفاع السكر الصباحي كاستجابة ارتدادية لهبوط السكر في منتصف الليل، وعلاجه يكون بتقليل جرعة الأنسولين المسائية وليس زيادتها!'
+                    },
+                    {
+                        category: 'التثقيف الصيدلاني والحقن',
+                        text: 'لماذا يُنصح مريض السكري بتدوير أماكن حقن الأنسولين (Site Rotation) وعدم الحقن في نفس النقطة باستمرار؟',
+                        options: [
+                            'لتجنب حدوث التضخم الدهني (Lipohypertrophy) الذي يُعيق امتصاص الأنسولين ويجعله غير منتظم',
+                            'لأن الأنسولين يفقد فعاليته الكيميائية إذا حُقن في البطن مرتين',
+                            'لمنع تغير لون الجلد إلى الأزرق الدائم',
+                            'لتقليل الحاجة إلى شرب الماء بعد الحقن'
+                        ],
+                        correct: 0,
+                        hint: 'تتكون كتل دهنية صلبة تحت الجلد تؤدي لتذبذب حاد في قراءات السكر.',
+                        explanation: 'الحقن المتكرر في نفس البقعة يسبب تضخماً دهنياً (Lipohypertrophy)؛ والحقن داخل هذه الكتل يبطئ امتصاص الأنسولين بشكل غير متوقع ويسبب تذبذب السكر.'
+                    },
+                    {
+                        category: 'حفظ وتخزين الأنسولين',
+                        text: 'ما هي الطريقة الصحيحة لحفظ قلم الأنسولين قيد الاستخدام اليومي بعد فتحه؟',
+                        options: [
+                            'وضعه في الفريزر (المجمد) بين الجرعات',
+                            'حفظه في درجة حرارة الغرفة (أقل من 25-30°م) بعيداً عن الشمس لمدة تصل إلى 28 يوماً',
+                            'تركه في السيارة تحت أشعة الشمس ليبقى دافئاً',
+                            'التخلص منه بعد 24 ساعة من الفتح'
+                        ],
+                        correct: 1,
+                        hint: 'الأقلام غير المفتوحة تُحفظ في الثلاجة (2-8°م)، أما المفتوحة فتُحفظ في درجة حرارة الغرفة لتقليل ألم الحقن البارد.',
+                        explanation: 'الأقلام غير المفتوحة تُخزن في الثلاجة (2–8°م) دون تجميد، وبعد فتحها تُحفظ في درجة حرارة الغرفة المعتدلة وتُستخدم خلال 28 يوماً (وبعض الأنواع مثل Degludec حتى 56 يوماً).'
+                    }
+                ]
+            },
+            {
+                id: 3,
+                badge: 'الدور الرابع (تحدي الزعيم)',
+                title: 'الصيدلي الخبير والمواقف المعقدة',
+                subtitle: 'حالات إكلينيكية متقدمة وتداخلات دوائية تحت ضغط الوقت',
+                icon: '👑',
+                timePerQuestion: 20,
+                questions: [
+                    {
+                        category: 'التداخلات الدوائية (Drug Interactions)',
+                        text: 'مريض سكري يتناول حاصرات بيتا غير الانتقائية (مثل Propranolol). ما الخطر الإكلينيكي الذي يجب تحذيره منه بخصوص هبوط السكر؟',
+                        options: [
+                            'تُخفي أعراض هبوط السكر التحذيرية (مثل خفقان القلب والرعشة) باستثناء التعرق',
+                            'تمنع امتصاص الأنسولين من تحت الجلد تماماً',
+                            'تسبب ارتفاعاً فوريّاً في السكر التراكمي',
+                            'تُبطل مفعول الجلوكوز الفموي'
+                        ],
+                        correct: 0,
+                        hint: 'الأدرينالين يسبب الخفقان عبر مستقبلات بيتا، بينما التعرق يتم عبر مستقبلات كولينية.',
+                        explanation: 'حاصرات بيتا تحجب أعراض الجهاز السمبثاوي المصاحبة لهبوط السكر (الخفقان والرعشة)، لكن التعرق (Sweating) يظل موجوداً، لذا يجب توعية المريض به كعلامة إنذار.'
+                    },
+                    {
+                        category: 'حالات الطوارئ (فاقد الوعي)',
+                        text: 'وُجد مريض سكري فاقداً للوعي في المنزل وسكر دمه 38 mg/dL. ما التصرف الإسعافي الصحيح والآمن فوراً؟',
+                        options: [
+                            'سكب عصير محلى في فمه وهو فاقد للوعي',
+                            'حقن إبرة الجلوكاجون (Glucagon) عضلياً أو تحت الجلد (أو دكستروز وريدي في المستشفى) ووضعه على جانبه',
+                            'إعطاؤه قرص جلوكوز فموي مع الماء',
+                            'حقن 10 وحدات أنسولين سريع'
+                        ],
+                        correct: 1,
+                        hint: 'إعطاء أي سوائل أو طعام عن طريق الفم لمريض فاقد للوعي يعرضه لخطر الاختناق القاتل (Aspiration).',
+                        explanation: 'يُمنع تماماً وضع أي طعام أو شراب في فم مريض فاقد للوعي؛ يُعطى الجلوكاجون (حقناً أو بخاخاً أنفياً) في المنزل أو محلول Dextrose 50% وريدياً في الطوارئ.'
+                    },
+                    {
+                        category: 'أيام المرض (Sick Day Rules)',
+                        text: 'أصيب مريض السكري من النوع الأول بنزلة معوية وفقدان للشهية. ما النصيحة الصيدلانية الذهبية بخصوص جرعة الأنسولين القاعدي (Basal)؟',
+                        options: [
+                            'إيقاف الأنسولين تماماً طالما أنه لا يأكل',
+                            'عدم إيقاف الأنسولين القاعدي أبداً، مع الإكثار من السوائل وفحص السكر والكيتونات بانتظام',
+                            'مضاعفة جرعة الأنسولين السريع ثلاث مرات',
+                            'استبدال الأنسولين بأقراص الميتفورمين مؤقتاً'
+                        ],
+                        correct: 1,
+                        hint: 'العدوى والمرض يرفعان هرمونات التوتر في الجسم، وإيقاف الأنسولين كلياً يسبب DKA سريعاً حتى بدون أكل!',
+                        explanation: 'أثناء المرض يفرز الجسم هرمونات ترفع السكر وتكسر الدهون؛ لذا فإن إيقاف الأنسولين القاعدي قد يُدخل مريض النوع الأول في حماض كيتوني سكري (DKA) خطير.'
+                    },
+                    {
+                        category: 'تعديل الجرعات والرياضة',
+                        text: 'مريض يمارس رياضة الجري لمدة 45 دقيقة مساءً ويلاحظ هبوط السكر أثناء التمرين أو بعده بساعات. ما التعديل الوقائي الأنسب؟',
+                        options: [
+                            'حقن الأنسولين في عضلة الفخذ قبل الجري مباشرة',
+                            'تقليل جرعة الأنسولين السريع قبل التمرين أو تناول وجبة خفيفة من الكربوهيدرات قبل الرياضة وتجنب الحقن في العضلة العاملة',
+                            'تجنب شرب الماء أثناء التمرين',
+                            'زيادة جرعة الأنسولين القاعدي قبل النوم'
+                        ],
+                        correct: 1,
+                        hint: 'الحقن في العضلة التي تتحرك بقوة يزيد تدفق الدم ويسرّع امتصاص الأنسولين بشكل مفاجئ.',
+                        explanation: 'الرياضة تزيد حساسية الخلايا للأنسولين وتزيد تدفق الدم للعضلات؛ لذا يُنصح بتجنب الحقن في العضلة العاملة وتناول كربوهيدرات وقائية أو تعديل الجرعة.'
+                    },
+                    {
+                        category: 'العناية الصيدلانية المتقدمة',
+                        text: 'مريض يستخدم قلم الأنسولين ويشتكي من خروج قطرات أنسولين من الجلد بعد سحب الإبرة مباشرة. ما السبب والحل؟',
+                        options: [
+                            'القلم تالف ويجب رميه فوراً',
+                            'يجب إبقاء الإبرة مغروسة تحت الجلد لمدة 6 إلى 10 ثوانٍ بعد الضغط الكامل على زر الحقن قبل سحبها',
+                            'يجب استخدام إبرة أطول (12 ملم) والضغط بقوة شديدة',
+                            'يجب رج القلم بعد الحقن'
+                        ],
+                        correct: 1,
+                        hint: 'أقلام الأنسولين تحتاج بضع ثوانٍ ليكتمل تفريغ الجرعة بالكامل داخل النسيج تحت الجلد.',
+                        explanation: 'الانتظار لمدة 6–10 ثوانٍ مع الاستمرار في الضغط على زر القلم يضمن دخول الجرعة كاملة ويمنع تسرب الأنسولين للخارج.'
+                    }
+                ]
+            }
+        ];
+
+        /**
+         * حالة اللعبة الكاملة (Game State)
+         */
+        const state = {
+            totalXP: 0,
+            unlockedStage: 0,
+            stageStars: [0, 0, 0, 0], // عدد النجوم (0 إلى 3) لكل دور
+            stageBestCorrect: [0, 0, 0, 0],
+            lifelines: {
+                fiftyFifty: 2,
+                hint: 2,
+                freeze: 2
+            },
+            // حالة الدور النشط
+            activeStageIdx: 0,
+            currentQIdx: 0,
+            hearts: 3,
+            streak: 0,
+            maxStageStreak: 0,
+            stageCorrectCount: 0,
+            stageEarnedXP: 0,
+            timeLeft: 25,
+            maxTime: 25,
+            timerInterval: null,
+            answered: false
+        };
+
+        // مراجع عناصر الواجهة
+        const screens = {
+            welcome: document.getElementById('welcome-screen'),
+            map: document.getElementById('map-screen'),
+            quiz: document.getElementById('quiz-screen'),
+            stageResult: document.getElementById('stage-result-screen'),
+            final: document.getElementById('final-screen')
+        };
+
+        function showScreen(screenName) {
+            Object.values(screens).forEach(el => el.classList.add('hidden'));
+            screens[screenName].classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // تحديث الشريط العلوي (XP والرتبة)
+        function updateTopBar() {
+            document.getElementById('total-xp-display').textContent = state.totalXP;
+            const rankBadge = document.getElementById('player-rank-badge');
+            if (state.totalXP >= 1500) {
+                rankBadge.textContent = 'خبير الغدد الصماء 👑';
+                rankBadge.className = 'text-xs font-extrabold text-amber-400';
+            } else if (state.totalXP >= 800) {
+                rankBadge.textContent = 'صيدلي إكلينيكي 🩺';
+                rankBadge.className = 'text-xs font-extrabold text-cyan-400';
+            } else if (state.totalXP >= 300) {
+                rankBadge.textContent = 'صيدلي متمرس 💊';
+                rankBadge.className = 'text-xs font-extrabold text-emerald-400';
+            } else {
+                rankBadge.textContent = 'متدرب صيدلة 🧬';
+                rankBadge.className = 'text-xs font-extrabold text-slate-300';
+            }
+        }
+
+        // بناء وتحديث خريطة الأدوار الأربعة
+        function renderStageMap() {
+            const grid = document.getElementById('stages-grid');
+            grid.innerHTML = '';
+
+            const totalStars = state.stageStars.reduce((a, b) => a + b, 0);
+            document.getElementById('total-stars-display').textContent = `${totalStars} / 12 ⭐`;
+
+            STAGES_DATA.forEach((stage, idx) => {
+                const isLocked = idx > state.unlockedStage;
+                const stars = state.stageStars[idx];
+                const isCompleted = stars > 0;
+
+                const card = document.createElement('div');
+                card.className = `stage-card glass-card rounded-3xl p-5 sm:p-6 relative overflow-hidden flex flex-col justify-between ${
+                    isLocked ? 'locked opacity-60 cursor-not-allowed border-slate-800' : 'cursor-pointer'
+                } ${isCompleted ? 'border-emerald-500/40' : ''}`;
+
+                // النجوم المرئية
+                let starsHTML = '';
+                for (let s = 1; s <= 3; s++) {
+                    starsHTML += s <= stars
+                        ? '<span class="text-amber-400 text-lg">★</span>'
+                        : '<span class="text-slate-600 text-lg">★</span>';
+                }
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-extrabold ${
+                                isLocked
+                                    ? 'bg-slate-800 text-slate-400'
+                                    : idx === 3
+                                        ? 'bg-amber-500/20 text-amber-300 border border-amber-400/30'
+                                        : 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30'
+                            }">
+                                ${stage.badge}
+                            </span>
+                            <div class="flex items-center gap-0.5 bg-slate-950/70 px-2.5 py-0.5 rounded-xl border border-slate-800">
+                                ${starsHTML}
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5 mb-3">
+                            <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-2xl shrink-0">
+                                ${isLocked ? '🔒' : stage.icon}
+                            </div>
+                            <div>
+                                <h3 class="text-base sm:text-lg font-black text-white leading-snug mb-1">${stage.title}</h3>
+                                <p class="text-xs text-slate-400 leading-relaxed">${stage.subtitle}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-2 border-t border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[11px] text-slate-400 font-semibold">
+                            ${stage.questions.length} أسئلة • ${stage.timePerQuestion}ث / سؤال
+                        </span>
+                        <span class="text-xs font-black ${
+                            isLocked ? 'text-slate-500' : isCompleted ? 'text-emerald-400' : 'text-cyan-400'
+                        }">
+                            ${isLocked ? 'مغلق (أكمل السابق)' : isCompleted ? 'إعادة التحسين ↺' : 'ابدأ الدور ⬅️'}
+                        </span>
+                    </div>
+                `;
+
+                if (!isLocked) {
+                    card.addEventListener('click', () => startStage(idx));
+                }
+
+                grid.appendChild(card);
+            });
+
+            // إظهار شريط الشهادة النهائية إذا تم اجتياز الأدوار الأربعة
+            const allCompleted = state.stageStars.every(s => s > 0);
+            document.getElementById('final-ceremony-banner').classList.toggle('hidden', !allCompleted);
+
+            showScreen('map');
+        }
+
+        // بدء دور محدد
+        function startStage(stageIdx) {
+            sfx.init();
+            state.activeStageIdx = stageIdx;
+            state.currentQIdx = 0;
+            state.hearts = 3;
+            state.streak = 0;
+            state.maxStageStreak = 0;
+            state.stageCorrectCount = 0;
+            state.stageEarnedXP = 0;
+
+            const stage = STAGES_DATA[stageIdx];
+            document.getElementById('current-stage-title').textContent = `${stage.badge}: ${stage.title}`;
+            document.getElementById('total-questions').textContent = stage.questions.length;
+
+            updateHeartsUI();
+            updateLifelinesUI();
+            showScreen('quiz');
+            loadQuestion();
+        }
+
+        function updateHeartsUI() {
+            const container = document.getElementById('hearts-container');
+            let html = '';
+            for (let i = 0; i < 3; i++) {
+                html += i < state.hearts ? '<span>❤️</span>' : '<span class="opacity-25 grayscale">🖤</span>';
+            }
+            container.innerHTML = html;
+        }
+
+        function updateLifelinesUI() {
+            document.getElementById('count-5050').textContent = state.lifelines.fiftyFifty;
+            document.getElementById('count-hint').textContent = state.lifelines.hint;
+            document.getElementById('count-freeze').textContent = state.lifelines.freeze;
+
+            document.getElementById('lifeline-5050').disabled = state.lifelines.fiftyFifty <= 0 || state.answered;
+            document.getElementById('lifeline-hint').disabled = state.lifelines.hint <= 0 || state.answered;
+            document.getElementById('lifeline-freeze').disabled = state.lifelines.freeze <= 0 || state.answered;
+        }
+
+        // تحميل السؤال الحالي
+        function loadQuestion() {
+            clearInterval(state.timerInterval);
+            state.answered = false;
+
+            const stage = STAGES_DATA[state.activeStageIdx];
+            const q = stage.questions[state.currentQIdx];
+
+            document.getElementById('question-number').textContent = state.currentQIdx + 1;
+            document.getElementById('question-category-tag').textContent = q.category;
+            document.getElementById('question-text').textContent = q.text;
+
+            // إخفاء التلميح وصندوق الشرح
+            document.getElementById('hint-box').classList.add('hidden');
+            document.getElementById('explanation-box').classList.add('hidden');
+            document.getElementById('question-card').classList.remove('animate-shake');
+
+            // تحديث شارة التتابع
+            const streakPill = document.getElementById('streak-pill');
+            if (state.streak >= 2) {
+                streakPill.classList.remove('hidden');
+                document.getElementById('streak-count').textContent = state.streak;
+            } else {
+                streakPill.classList.add('hidden');
+            }
+
+            // بناء أزرار الخيارات
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            const letters = ['أ', 'ب', 'ج', 'د'];
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn w-full text-right p-3.5 sm:p-4 rounded-2xl bg-slate-900/90 border border-slate-700/90 text-slate-100 font-bold text-sm sm:text-base flex items-center gap-3 cursor-pointer';
+                btn.dataset.index = idx;
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-600 flex items-center justify-center text-xs font-black text-cyan-300 shrink-0">
+                        ${letters[idx]}
+                    </span>
+                    <span class="flex-1 leading-snug">${optText}</span>
+                `;
+                btn.addEventListener('click', () => handleAnswer(idx));
+                optionsContainer.appendChild(btn);
+            });
+
+            updateLifelinesUI();
+
+            // بدء المؤقت التنازلي
+            state.maxTime = stage.timePerQuestion;
+            state.timeLeft = state.maxTime;
+            updateTimerUI();
+
+            state.timerInterval = setInterval(() => {
+                state.timeLeft -= 0.2;
+                if (state.timeLeft <= 0) {
+                    state.timeLeft = 0;
+                    updateTimerUI();
+                    clearInterval(state.timerInterval);
+                    handleTimeOut();
+                } else {
+                    updateTimerUI();
+                }
+            }, 200);
+        }
+
+        function updateTimerUI() {
+            const pct = Math.max(0, Math.min(100, (state.timeLeft / state.maxTime) * 100));
+            const bar = document.getElementById('timer-bar');
+            const text = document.getElementById('timer-text');
+
+            bar.style.width = `${pct}%`;
+            text.textContent = `⏱️ ${Math.ceil(state.timeLeft)} ثانية`;
+
+            if (pct <= 25) {
+                bar.className = 'h-full bg-rose-500 transition-all duration-200';
+                text.classList.add('text-rose-400', 'border-rose-500/50');
+            } else if (pct <= 50) {
+                bar.className = 'h-full bg-amber-400 transition-all duration-200';
+                text.classList.remove('text-rose-400', 'border-rose-500/50');
+            } else {
+                bar.className = 'h-full bg-gradient-to-l from-cyan-400 to-emerald-400 transition-all duration-200';
+                text.classList.remove('text-rose-400', 'border-rose-500/50');
+            }
+        }
+
+        // معالجة اختيار الإجابة
+        function handleAnswer(selectedIdx) {
+            if (state.answered) return;
+            state.answered = true;
+            clearInterval(state.timerInterval);
+            updateLifelinesUI();
+
+            const stage = STAGES_DATA[state.activeStageIdx];
+            const q = stage.questions[state.currentQIdx];
+            const isCorrect = selectedIdx === q.correct;
+
+            const buttons = document.querySelectorAll('#options-container button');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) {
+                    btn.className = 'w-full text-right p-3.5 sm:p-4 rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 text-white font-bold text-sm sm:text-base flex items-center gap-3';
+                    btn.querySelector('span:first-child').className = 'w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-black shrink-0';
+                    btn.querySelector('span:first-child').textContent = '✓';
+                } else if (idx === selectedIdx && !isCorrect) {
+                    btn.className = 'w-full text-right p-3.5 sm:p-4 rounded-2xl bg-rose-500/20 border-2 border-rose-500 text-rose-200 font-bold text-sm sm:text-base flex items-center gap-3';
+                    btn.querySelector('span:first-child').className = 'w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center text-xs font-black shrink-0';
+                    btn.querySelector('span:first-child').textContent = '✕';
+                } else {
+                    btn.classList.add('opacity-45');
+                }
+            });
+
+            if (isCorrect) {
+                sfx.playCorrect();
+                state.stageCorrectCount++;
+                state.streak++;
+                if (state.streak > state.maxStageStreak) state.maxStageStreak = state.streak;
+
+                const timeBonus = Math.round(state.timeLeft * 2);
+                const streakBonus = state.streak > 1 ? state.streak * 15 : 0;
+                const earned = 100 + timeBonus + streakBonus;
+
+                state.stageEarnedXP += earned;
+                state.totalXP += earned;
+                updateTopBar();
+
+                showExplanation(true, `إجابة دقيقة! (+${earned} XP)`, q.explanation);
+            } else {
+                sfx.playWrong();
+                state.streak = 0;
+                state.hearts = Math.max(0, state.hearts - 1);
+                updateHeartsUI();
+                document.getElementById('question-card').classList.add('animate-shake');
+
+                showExplanation(false, 'إجابة غير صحيحة! انتبه للمعلومة الإكلينيكية:', q.explanation);
+            }
+        }
+
+        // انتهاء الوقت
+        function handleTimeOut() {
+            if (state.answered) return;
+            state.answered = true;
+            updateLifelinesUI();
+            sfx.playWrong();
+
+            const stage = STAGES_DATA[state.activeStageIdx];
+            const q = stage.questions[state.currentQIdx];
+
+            state.streak = 0;
+            state.hearts = Math.max(0, state.hearts - 1);
+            updateHeartsUI();
+            document.getElementById('question-card').classList.add('animate-shake');
+
+            const buttons = document.querySelectorAll('#options-container button');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) {
+                    btn.className = 'w-full text-right p-3.5 sm:p-4 rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 text-white font-bold text-sm sm:text-base flex items-center gap-3';
+                } else {
+                    btn.classList.add('opacity-45');
+                }
+            });
+
+            showExplanation(false, '⏱️ انتهى الوقت! راجع الإجابة الصحيحة:', q.explanation);
+        }
+
+        function showExplanation(isSuccess, heading, text) {
+            const box = document.getElementById('explanation-box');
+            const icon = document.getElementById('explanation-icon');
+            const headEl = document.getElementById('explanation-heading');
+            const textEl = document.getElementById('explanation-text');
+            const nextBtn = document.getElementById('next-question-btn');
+
+            box.classList.remove('hidden', 'bg-emerald-950/50', 'border-emerald-500/40', 'bg-rose-950/50', 'border-rose-500/40');
+            if (isSuccess) {
+                box.classList.add('bg-emerald-950/50', 'border-emerald-500/40');
+                icon.textContent = '✅';
+                headEl.className = 'text-sm sm:text-base font-black text-emerald-300';
+            } else {
+                box.classList.add('bg-rose-950/50', 'border-rose-500/40');
+                icon.textContent = '🩺';
+                headEl.className = 'text-sm sm:text-base font-black text-rose-300';
+            }
+
+            headEl.textContent = heading;
+            textEl.textContent = text;
+
+            const stage = STAGES_DATA[state.activeStageIdx];
+            const isLastQ = state.currentQIdx >= stage.questions.length - 1;
+            const outOfHearts = state.hearts <= 0;
+
+            nextBtn.textContent = outOfHearts
+                ? 'عرض نتيجة المحاولة 📊'
+                : isLastQ
+                    ? 'إنهاء الدور وعرض النجوم 🏆'
+                    : 'السؤال التالي ⬅️';
+        }
+
+        // الانتقال للسؤال التالي أو إنهاء الدور
+        function proceedAfterQuestion() {
+            const stage = STAGES_DATA[state.activeStageIdx];
+            if (state.hearts <= 0 || state.currentQIdx >= stage.questions.length - 1) {
+                finishStage();
+            } else {
+                state.currentQIdx++;
+                loadQuestion();
+            }
+        }
+
+        // إنهاء الدور وحساب النجوم
+        function finishStage() {
+            clearInterval(state.timerInterval);
+            const stage = STAGES_DATA[state.activeStageIdx];
+            const totalQ = stage.questions.length;
+            const correct = state.stageCorrectCount;
+            const ratio = correct / totalQ;
+
+            let starsEarned = 0;
+            if (state.hearts > 0 && ratio >= 0.6) {
+                if (ratio === 1 && state.hearts === 3) starsEarned = 3;
+                else if (ratio >= 0.8) starsEarned = 2;
+                else starsEarned = 1;
+            }
+
+            const passed = starsEarned > 0;
+            if (passed) {
+                sfx.playVictory();
+                if (starsEarned > state.stageStars[state.activeStageIdx]) {
+                    state.stageStars[state.activeStageIdx] = starsEarned;
+                }
+                if (correct > state.stageBestCorrect[state.activeStageIdx]) {
+                    state.stageBestCorrect[state.activeStageIdx] = correct;
+                }
+                if (state.activeStageIdx === state.unlockedStage && state.unlockedStage < STAGES_DATA.length - 1) {
+                    state.unlockedStage++;
+                }
+            } else {
+                sfx.playWrong();
+            }
+
+            // تحديث شاشة نتيجة الدور
+            document.getElementById('stage-result-icon').textContent = passed ? '🏆' : '💔';
+            document.getElementById('stage-result-title').textContent = passed
+                ? `أحسنت! اجتزت ${stage.badge}`
+                : 'نفدت الأرواح! حاول مجدداً';
+            document.getElementById('stage-result-subtitle').textContent = passed
+                ? 'لقد أثبتّ كفاءتك العلمية في هذا المستوى.'
+                : 'تحتاج إلى الإجابة على 3 أسئلة على الأقل مع بقاء قلب واحد لفتح الدور التالي.';
+
+            const starsContainer = document.getElementById('stage-stars-earned');
+            starsContainer.innerHTML = '';
+            for (let s = 1; s <= 3; s++) {
+                starsContainer.innerHTML += s <= starsEarned
+                    ? '<span class="text-amber-400 drop-shadow">⭐</span>'
+                    : '<span class="opacity-25 grayscale">⭐</span>';
+            }
+
+            document.getElementById('stage-correct-stat').textContent = `${correct} / ${totalQ}`;
+            document.getElementById('stage-xp-stat').textContent = `+${state.stageEarnedXP}`;
+            document.getElementById('stage-streak-stat').textContent = `×${Math.max(1, state.maxStageStreak)}`;
+
+            const nextStageBtn = document.getElementById('next-stage-btn');
+            if (!passed) {
+                nextStageBtn.textContent = 'العودة لخريطة الأدوار 🗺️';
+            } else if (state.activeStageIdx < STAGES_DATA.length - 1) {
+                nextStageBtn.textContent = 'الدور التالي 🚀';
+            } else {
+                nextStageBtn.textContent = 'شهادة التخرج النهائية 🎓';
+            }
+
+            showScreen('stageResult');
+        }
+
+        // وسائل المساعدة الثلاث
+        document.getElementById('lifeline-5050').addEventListener('click', () => {
+            if (state.lifelines.fiftyFifty <= 0 || state.answered) return;
+            state.lifelines.fiftyFifty--;
+            sfx.playPowerup();
+
+            const stage = STAGES_DATA[state.activeStageIdx];
+            const q = stage.questions[state.currentQIdx];
+            const wrongIndices = [0, 1, 2, 3].filter(i => i !== q.correct);
+            // خلط عشوائي وحذف خيارين خاطئين
+            wrongIndices.sort(() => Math.random() - 0.5);
+            const toHide = wrongIndices.slice(0, 2);
+
+            const buttons = document.querySelectorAll('#options-container button');
+            toHide.forEach(idx => {
+                buttons[idx].disabled = true;
+                buttons[idx].classList.add('opacity-20', 'line-through');
+            });
+
+            updateLifelinesUI();
+        });
+
+        document.getElementById('lifeline-hint').addEventListener('click', () => {
+            if (state.lifelines.hint <= 0 || state.answered) return;
+            state.lifelines.hint--;
+            sfx.playPowerup();
+
+            const stage = STAGES_DATA[state.activeStageIdx];
+            const q = stage.questions[state.currentQIdx];
+            document.getElementById('hint-text').textContent = q.hint;
+            document.getElementById('hint-box').classList.remove('hidden');
+
+            updateLifelinesUI();
+        });
+
+        document.getElementById('lifeline-freeze').addEventListener('click', () => {
+            if (state.lifelines.freeze <= 0 || state.answered) return;
+            state.lifelines.freeze--;
+            sfx.playPowerup();
+
+            state.timeLeft = Math.min(state.maxTime + 15, state.timeLeft + 15);
+            updateTimerUI();
+            updateLifelinesUI();
+        });
+
+        // عرض شاشة التخرج النهائية
+        function showFinalGraduation() {
+            const totalStars = state.stageStars.reduce((a, b) => a + b, 0);
+            const totalBestCorrect = state.stageBestCorrect.reduce((a, b) => a + b, 0);
+            const accuracy = Math.round((totalBestCorrect / 20) * 100);
+
+            document.getElementById('grand-xp').textContent = state.totalXP;
+            document.getElementById('grand-stars').textContent = `${totalStars} / 12`;
+            document.getElementById('grand-accuracy').textContent = `${accuracy}%`;
+
+            const titleEl = document.getElementById('final-rank-title');
+            if (totalStars >= 10) {
+                titleEl.textContent = 'استشاري الغدد الصماء والأنسولين 👑';
+            } else if (totalStars >= 7) {
+                titleEl.textContent = 'صيدلي إكلينيكي معتمد 🩺';
+            } else {
+                titleEl.textContent = 'صيدلي ممارس متميز 💊';
+            }
+
+            sfx.playVictory();
+            showScreen('final');
+        }
+
+        // ربط أزرار التنقل الرئيسية
+        document.getElementById('enter-map-btn').addEventListener('click', () => {
+            sfx.init();
+            renderStageMap();
+        });
+
+        document.getElementById('home-logo-btn').addEventListener('click', () => {
+            clearInterval(state.timerInterval);
+            renderStageMap();
+        });
+
+        document.getElementById('quit-stage-btn').addEventListener('click', () => {
+            clearInterval(state.timerInterval);
+            renderStageMap();
+        });
+
+        document.getElementById('next-question-btn').addEventListener('click', proceedAfterQuestion);
+
+        document.getElementById('retry-stage-btn').addEventListener('click', () => {
+            startStage(state.activeStageIdx);
+        });
+
+        document.getElementById('next-stage-btn').addEventListener('click', () => {
+            const passed = state.stageStars[state.activeStageIdx] > 0;
+            if (!passed) {
+                renderStageMap();
+            } else if (state.activeStageIdx < STAGES_DATA.length - 1) {
+                startStage(state.activeStageIdx + 1);
+            } else {
+                showFinalGraduation();
+            }
+        });
+
+        document.getElementById('view-final-report-btn').addEventListener('click', showFinalGraduation);
+        document.getElementById('back-to-map-from-final').addEventListener('click', renderStageMap);
+
+        document.getElementById('reset-all-game-btn').addEventListener('click', () => {
+            state.totalXP = 0;
+            state.unlockedStage = 0;
+            state.stageStars = [0, 0, 0, 0];
+            state.stageBestCorrect = [0, 0, 0, 0];
+            state.lifelines = { fiftyFifty: 2, hint: 2, freeze: 2 };
+            updateTopBar();
+            renderStageMap();
+        });
+
+        document.getElementById('sound-toggle-btn').addEventListener('click', () => {
+            const muted = sfx.toggle();
+            document.getElementById('sound-icon').textContent = muted ? '🔇' : '🔊';
+        });
+    </script>
+</body>
+</html>
