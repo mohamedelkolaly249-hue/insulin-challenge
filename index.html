@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MNU Pharmacology | Insulin Clinical Challenge</title>
+  <title>MNU Pharmacology | Insulin Pharmacy Challenge</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,7 +111,7 @@
           <h1 class="font-extrabold text-sm sm:text-lg text-white leading-tight">
             Pharmacology & Toxicology Department
           </h1>
-          <p class="text-[11px] text-sky-300 font-medium">Insulin Clinical Challenge (36 Cases • Balanced Edition)</p>
+          <p class="text-[11px] text-sky-300 font-medium">Insulin Interactive Challenge (36 Questions)</p>
         </div>
       </div>
 
@@ -177,311 +177,311 @@
       document.getElementById('soundBtn').textContent = soundEnabled ? '🔊' : '🔇';
     }
 
-    // --- 6 Balanced Clinical Modules (6 Questions Each = 36 Questions, 30s Timer) ---
+    // --- 6 Student-Friendly Modules (6 Questions Each = 36 Questions, 30s Timer) ---
     const STAGES = [
       {
         id: 1,
-        title: "Module 1: Insulin Physiology & Structure",
-        subtitle: "Receptors, Secretion & Analog Design",
+        title: "Module 1: Insulin Basics & Physiology",
+        subtitle: "Secretion, Receptors & Glucose Uptake",
         icon: "🧬",
         timePerQ: 30,
         questions: [
           {
-            q: "When insulin binds to its receptor on muscle and fat cells, which intracellular signaling pathway is activated to move GLUT4 transporters to the cell surface?",
-            options: ["IRS-1 / PI3K / Akt pathway", "cAMP / PKA pathway", "JAK / STAT pathway", "GABA chloride channel pathway"],
+            q: "Which cells in the pancreatic Islets of Langerhans produce and secrete insulin?",
+            options: ["Beta (β) cells", "Alpha (α) cells", "Delta (δ) cells", "Acinar cells"],
             correct: 0,
-            hint: "PI3K (Phosphatidylinositol 3-kinase) and Akt mediate insulin's metabolic glucose uptake.",
-            explanation: "Insulin receptor tyrosine kinase phosphorylates IRS-1, activating PI3K and Akt (PKB), which stimulates GLUT4 translocation to the plasma membrane."
+            hint: "Alpha cells secrete glucagon, while insulin comes from Beta cells.",
+            explanation: "Pancreatic Beta cells synthesize and secrete insulin when blood glucose rises, whereas Alpha cells secrete glucagon."
           },
           {
-            q: "How was Insulin Lispro (Humalog) structurally modified to act much faster than Regular human insulin?",
-            options: ["Proline (B28) and Lysine (B29) on the B-chain were reversed", "A fatty acid chain was attached to lengthen its half-life", "It was mixed with protamine and zinc", "It was formulated at an acidic pH of 4.0"],
+            q: "What is the main physiological effect of insulin on blood glucose levels?",
+            options: ["Lowers blood glucose by promoting cellular uptake and glycogen storage", "Raises blood glucose by breaking down liver glycogen", "Increases glucose absorption from the stomach", "Stimulates ketone body production"],
             correct: 0,
-            hint: "Its name 'Lis-Pro' comes from inverting Lysine and Proline at positions 28 and 29.",
-            explanation: "Inverting Proline B28 and Lysine B29 prevents insulin dimers from sticking together into hexamers, allowing rapid absorption as monomers."
+            hint: "Insulin is the primary anabolic hormone that moves glucose from blood into cells.",
+            explanation: "Insulin lowers blood glucose by stimulating glucose uptake into muscle and fat cells and promoting glycogen synthesis in the liver."
           },
           {
-            q: "Why does Insulin Glargine (Lantus) provide a smooth 24-hour basal effect after subcutaneous injection?",
-            options: ["It is dissolved in an acidic solution (pH 4) and forms microprecipitates at neutral body pH (7.4) that dissolve slowly", "It binds covalently to red blood cells", "It is injected directly into the muscle", "It blocks renal glucose excretion"],
+            q: "Which glucose transporter moves to the cell membrane of skeletal muscle and fat cells in response to insulin?",
+            options: ["GLUT4", "GLUT1", "GLUT2", "SGLT1"],
             correct: 0,
-            hint: "That is also why Glargine is clear in the vial and must never be mixed with other insulins.",
-            explanation: "Insulin Glargine precipitates upon entering neutral subcutaneous tissue (pH 7.4), slowly releasing small amounts of insulin over ~24 hours."
+            hint: "Remember: GLUT4 is insulin-dependent (found in muscle and adipose tissue).",
+            explanation: "GLUT4 is stored inside muscle and fat cells; insulin binding triggers GLUT4 translocation to the membrane to allow glucose entry."
           },
           {
-            q: "How does Insulin Detemir (Levemir) extend its duration of action in the body?",
-            options: ["It has a fatty acid side chain that binds reversibly to plasma albumin", "It is formulated as a cloudy NPH suspension", "It is a dry powder inhaler", "It inhibits liver insulin-degrading enzymes"],
+            q: "Which substance is released in equal amounts with natural insulin and helps measure endogenous insulin production?",
+            options: ["C-Peptide", "HbA1c", "Bilirubin", "Creatinine"],
             correct: 0,
-            hint: "Over 98% of Insulin Detemir circulates bound to albumin in the bloodstream.",
-            explanation: "Acylation with a C14 fatty acid (myristic acid) allows Insulin Detemir to self-associate and bind reversibly to albumin, prolonging its action."
+            hint: "It is cleaved from proinsulin before insulin is secreted.",
+            explanation: "C-Peptide is co-secreted in equimolar amounts with endogenous insulin, whereas commercial insulin injections contain no C-peptide."
           },
           {
-            q: "Which hormone is co-secreted with insulin from pancreatic beta cells, slows gastric emptying, and suppresses post-meal glucagon?",
-            options: ["Amylin", "Somatostatin", "Cortisol", "Epinephrine"],
+            q: "What type of receptor does insulin bind to on target cell membranes?",
+            options: ["Tyrosine Kinase Receptor", "G-Protein Coupled Receptor (GPCR)", "Ligand-gated Ion Channel", "Intracellular Nuclear Receptor"],
             correct: 0,
-            hint: "Pramlintide is a synthetic drug analog of this hormone.",
-            explanation: "Amylin (IAPP) is co-secreted with insulin from beta cells to slow gastric emptying, reduce postprandial glucagon spikes, and promote satiety."
+            hint: "Insulin binding activates autophosphorylation of tyrosine residues.",
+            explanation: "The insulin receptor is a transmembrane receptor tyrosine kinase composed of two alpha and two beta subunits."
           },
           {
-            q: "In pancreatic beta cells, elevated glucose increases ATP, which closes ATP-sensitive K+ channels and opens which channel to trigger insulin release?",
-            options: ["Voltage-gated Calcium (Ca2+) channels", "Sodium-Potassium pumps", "Chloride leak channels", "Proton pumps"],
+            q: "In Type 1 Diabetes Mellitus, what is the primary underlying cause of hyperglycemia?",
+            options: ["Autoimmune destruction of pancreatic beta cells causing absolute insulin deficiency", "Mild insulin resistance due to obesity only", "Excessive insulin secretion from the liver", "Overproduction of somatostatin"],
             correct: 0,
-            hint: "Calcium influx into the beta cell triggers the fusion of insulin granules with the cell membrane.",
-            explanation: "Closing KATP channels depolarizes the beta-cell membrane, opening voltage-gated Ca2+ channels and triggering insulin exocytosis."
+            hint: "Patients with Type 1 Diabetes require lifelong exogenous insulin therapy.",
+            explanation: "Type 1 Diabetes is caused by autoimmune destruction of pancreatic beta cells, leading to an absolute lack of insulin."
           }
         ]
       },
       {
         id: 2,
-        title: "Module 2: Dosing Math & Insulin Types",
-        subtitle: "TDD, Correction Factors, Carb Ratios & Mixing",
-        icon: "🧮",
+        title: "Module 2: Types of Insulin & Kinetics",
+        subtitle: "Rapid, Short, Intermediate & Long-Acting Insulins",
+        icon: "⏱️",
         timePerQ: 30,
         questions: [
           {
-            q: "A 60 kg patient with Type 1 Diabetes is started on a Total Daily Dose (TDD) of 0.5 units/kg/day (split 50% basal, 50% prandial). What is their daily basal dose?",
-            options: ["15 units once daily (half of 30 units TDD)", "30 units once daily", "60 units once daily", "5 units once daily"],
+            q: "Which of the following is a rapid-acting insulin analog taken 0–15 minutes before meals?",
+            options: ["Insulin Lispro (Humalog)", "Insulin Glargine (Lantus)", "NPH Insulin (Humulin N)", "Insulin Degludec (Tresiba)"],
             correct: 0,
-            hint: "First calculate TDD = 60 kg × 0.5 = 30 units/day, then take 50% for basal.",
-            explanation: "TDD = 60 × 0.5 = 30 units/day. Splitting 50:50 gives 15 units basal insulin and 15 units total mealtime insulin (5 units before each of 3 meals)."
+            hint: "The three rapid-acting analogs are Lispro, Aspart, and Glulisine.",
+            explanation: "Insulin Lispro acts within 10–20 minutes, peaks in 1–3 hours, and lasts 3–5 hours—ideal for mealtime coverage."
           },
           {
-            q: "A patient uses 50 units of rapid-acting insulin regimen per day (TDD = 50). Using the 'Rule of 500', what is their Insulin-to-Carb Ratio (ICR)?",
-            options: ["1 unit per 10 grams of carbohydrate (1:10)", "1 unit per 25 grams of carbohydrate (1:25)", "1 unit per 5 grams of carbohydrate (1:5)", "1 unit per 50 grams of carbohydrate (1:50)"],
+            q: "Which insulin is a cloudy, intermediate-acting suspension with a peak at 4–10 hours and duration of 12–18 hours?",
+            options: ["NPH (Isophane) Insulin", "Insulin Aspart", "Insulin Glargine", "Regular Insulin"],
             correct: 0,
-            hint: "Divide 500 by the Total Daily Dose (500 ÷ 50).",
-            explanation: "ICR = 500 ÷ 50 = 10, meaning 1 unit of rapid-acting insulin covers 10 grams of carbohydrates."
+            hint: "It contains protamine and zinc, giving it a cloudy appearance.",
+            explanation: "NPH insulin is a cloudy intermediate-acting suspension that must be gently rolled (not shaken) before injection."
           },
           {
-            q: "Using the 'Rule of 1800' for a patient with a Total Daily Dose (TDD) of 45 units, how much will 1 unit of rapid-acting insulin lower their blood glucose?",
-            options: ["40 mg/dL", "20 mg/dL", "60 mg/dL", "15 mg/dL"],
+            q: "Which long-acting basal insulin provides a steady, peakless effect for about 24 hours?",
+            options: ["Insulin Glargine (Lantus)", "Insulin Lispro (Humalog)", "Insulin Glulisine (Apidra)", "Regular Insulin (Humulin R)"],
             correct: 0,
-            hint: "Divide 1800 by 45 units (1800 ÷ 45).",
-            explanation: "Insulin Sensitivity Factor (ISF) = 1800 ÷ 45 = 40 mg/dL drop per 1 unit of corrective insulin."
+            hint: "It is usually injected once daily at the same time each day.",
+            explanation: "Insulin Glargine forms microprecipitates under the skin that dissolve slowly, providing ~24 hours of peakless basal coverage."
           },
           {
-            q: "A patient has a pre-meal blood glucose of 220 mg/dL (target 120 mg/dL), an ISF of 50 mg/dL/unit, an ICR of 1:15, and plans to eat 60 g of carbs. What is the total pre-meal insulin dose?",
-            options: ["6 units (2 units correction + 4 units for food)", "4 units (0 units correction + 4 units for food)", "8 units (4 units correction + 4 units for food)", "5 units (1 unit correction + 4 units for food)"],
+            q: "Why must Insulin Glargine (Lantus) NEVER be mixed in the same syringe with any other insulin?",
+            options: ["It is formulated at an acidic pH (pH 4) and will precipitate if mixed with neutral insulins", "It turns into a gas", "It loses its color", "It doubles the blood pressure"],
             correct: 0,
-            hint: "Correction = (220 - 120) ÷ 50 = 2 units. Food = 60 ÷ 15 = 4 units.",
-            explanation: "Correction dose = 100 / 50 = 2 units. Meal bolus = 60 / 15 = 4 units. Total pre-meal dose = 6 units."
+            hint: "Glargine requires an acidic pH to stay clear in the vial.",
+            explanation: "Mixing acidic Insulin Glargine with neutral insulins alters its pH, causing unpredictable precipitation and altering its absorption."
           },
           {
-            q: "When converting a patient from twice-daily NPH insulin (total 40 units/day) to once-daily Insulin Glargine U-100, what initial dose is recommended?",
-            options: ["32 units once daily (reduce total daily basal dose by 20%)", "40 units twice daily", "20 units once daily (reduce by 50%)", "48 units once daily (increase by 20%)"],
+            q: "When mixing Regular insulin (clear) and NPH insulin (cloudy) in one syringe, what is the correct drawing order?",
+            options: ["Clear before Cloudy (draw Regular first, then NPH)", "Cloudy before Clear (draw NPH first, then Regular)", "Shake the vial hard before drawing", "Order does not matter"],
             correct: 0,
-            hint: "Switching from BID NPH to QD Glargine requires a 20% dose reduction to prevent nocturnal hypoglycemia.",
-            explanation: "To reduce hypoglycemia risk when switching from twice-daily NPH to once-daily Glargine, decrease the total basal dose by 20% (40 × 0.8 = 32 units)."
+            hint: "Remember: 'Clear before Cloudy' prevents contaminating the clear vial with protamine.",
+            explanation: "Drawing Regular (clear) before NPH (cloudy) keeps the Regular insulin vial free from NPH protamine."
           },
           {
-            q: "Which insulin formulation is an ultra-long-acting basal insulin lasting over 42 hours with flexible once-daily dosing?",
-            options: ["Insulin Degludec (Tresiba)", "NPH Insulin (Humulin N)", "Regular Insulin (Humulin R)", "Insulin Glulisine (Apidra)"],
+            q: "Which ultra-long-acting basal insulin has the longest duration of action (>42 hours)?",
+            options: ["Insulin Degludec (Tresiba)", "Regular Insulin", "NPH Insulin", "Insulin Aspart"],
             correct: 0,
-            hint: "It forms soluble multi-hexamer chains subcutaneously and has a half-life of ~25 hours.",
-            explanation: "Insulin Degludec (Tresiba) has a duration of action >42 hours, offering a flat basal profile and dosing flexibility."
+            hint: "Its half-life is around 25 hours, allowing flexible once-daily dosing.",
+            explanation: "Insulin Degludec forms multi-hexamers subcutaneously, providing a flat basal insulin level lasting over 42 hours."
           }
         ]
       },
       {
         id: 3,
-        title: "Module 3: Hospital Emergencies (DKA & HHS)",
-        subtitle: "Potassium Rules, Fluids & IV-to-SC Transition",
-        icon: "🚨",
+        title: "Module 3: Administration, Storage & Devices",
+        subtitle: "Injection Sites, Pens, Storage & Lipohypertrophy",
+        icon: "💉",
         timePerQ: 30,
         questions: [
           {
-            q: "A DKA patient arrives with blood glucose 460 mg/dL and serum potassium (K+) of 3.0 mEq/L. What is the mandatory FIRST action before starting IV insulin?",
-            options: ["Give IV fluids and Potassium replacement first; hold insulin until K+ is ≥ 3.3 mEq/L", "Start an immediate high-dose IV insulin bolus", "Administer IV Sodium Bicarbonate", "Give oral potassium tablets only"],
+            q: "Which subcutaneous injection site generally provides the fastest and most consistent absorption of mealtime insulin?",
+            options: ["Abdomen (at least 2 inches away from the navel)", "Outer thigh", "Upper buttocks", "Calf muscle"],
             correct: 0,
-            hint: "Insulin shifts potassium into cells and can cause fatal arrhythmias if baseline K+ is < 3.3 mEq/L.",
-            explanation: "Because insulin drives extracellular K+ into cells, starting insulin when K+ < 3.3 mEq/L can trigger severe hypokalemia and cardiac arrest."
+            hint: "The abdomen is the preferred site for rapid-acting pre-meal insulin.",
+            explanation: "The abdomen absorbs insulin fastest and most predictably, followed by the back of the upper arm, thigh, and buttocks."
           },
           {
-            q: "During IV insulin therapy for DKA, blood glucose drops to 200 mg/dL, but the patient still has ketosis and an elevated anion gap. What should be done next?",
-            options: ["Add Dextrose (D5W) to the IV fluids and continue IV insulin at a lower rate until the anion gap closes", "Stop IV insulin immediately", "Double the IV insulin rate without adding dextrose", "Discharge the patient on oral metformin"],
+            q: "What local skin complication occurs if a patient repeatedly injects insulin into the exact same spot without rotating sites?",
+            options: ["Lipohypertrophy (rubbery fatty lumps that delay insulin absorption)", "Skin melanoma", "Bone fracture", "Hair growth"],
             correct: 0,
-            hint: "Blood sugar normalizes faster than ketoacidosis clears; stopping insulin early restarts DKA.",
-            explanation: "Adding dextrose (D5W) once glucose reaches ~200 mg/dL prevents hypoglycemia while allowing continued insulin infusion to clear ketones."
+            hint: "Rotating injection sites prevents thickened fatty tissue buildup.",
+            explanation: "Lipohypertrophy is thickened, rubbery subcutaneous fat caused by repeated injections in one spot, leading to erratic insulin absorption."
           },
           {
-            q: "When transitioning a recovered DKA patient from an IV Regular insulin drip to subcutaneous Insulin Glargine, how long should the IV drip overlap after injecting Glargine?",
-            options: ["1 to 2 hours overlap before stopping the IV drip", "Stop the IV drip immediately at the exact same minute", "Stop the IV drip 2 hours before giving Glargine", "Overlap for 12 hours"],
+            q: "How should unopened insulin vials and pens be stored before first use?",
+            options: ["In the refrigerator at 2–8°C (never frozen)", "In the freezer at -10°C", "In direct sunlight on a window sill", "Inside a hot car"],
             correct: 0,
-            hint: "IV insulin wears off in ~10 minutes, while subcutaneous Glargine needs 1–2 hours to start working.",
-            explanation: "A 1–2 hour overlap ensures subcutaneous basal insulin reaches therapeutic levels before IV insulin clears, preventing rebound DKA."
+            hint: "Freezing destroys insulin protein structure; keep unopened vials refrigerated.",
+            explanation: "Unopened insulin must be refrigerated at 2–8°C. If insulin freezes, it loses potency and must be discarded."
           },
           {
-            q: "What is the main clinical difference between Hyperosmolar Hyperglycemic State (HHS) and Diabetic Ketoacidosis (DKA)?",
-            options: ["HHS has extreme hyperglycemia (>600 mg/dL) and severe dehydration WITHOUT significant ketosis or acidosis (pH > 7.30)", "HHS always has severe ketoacidosis (pH < 7.1)", "HHS occurs only in children", "HHS requires no IV fluids"],
+            q: "Once opened and in use, how long can most standard insulin pens/vials (such as Lantus, Humalog, NovoLog) be kept at room temperature (<25–30°C)?",
+            options: ["Up to 28 days", "Only 12 hours", "6 months", "1 year"],
             correct: 0,
-            hint: "In Type 2 Diabetes, small amounts of residual insulin prevent ketone production but cannot stop extreme hyperglycemia.",
-            explanation: "HHS is characterized by severe hyperosmolality (>320 mOsm/kg), profound dehydration, glucose >600 mg/dL, and minimal/absent ketones (pH > 7.30)."
+            hint: "Room temperature insulin is less painful to inject and remains stable for 4 weeks.",
+            explanation: "Most opened insulin vials and pens remain stable at room temperature for up to 28 days (42 days for Levemir and Tresiba)."
           },
           {
-            q: "An unconscious diabetic patient has a blood glucose of 34 mg/dL and no IV line available. What is the safest immediate emergency rescue treatment?",
-            options: ["Intramuscular or Intranasal Glucagon", "Pouring orange juice into the patient's mouth", "Subcutaneous Regular insulin", "Oral glucose tablets"],
+            q: "What is the standard route of administration for routine outpatient insulin therapy?",
+            options: ["Subcutaneous (SC) injection", "Intramuscular (IM) injection", "Intravenous (IV) push", "Sublingual tablet"],
             correct: 0,
-            hint: "Never put food or liquids in the mouth of an unconscious person due to choking/aspiration risk.",
-            explanation: "Glucagon (IM or intranasal) rapidly mobilizes liver glycogen to raise blood glucose in unconscious patients without IV access."
+            hint: "Short 4 mm to 6 mm pen needles deliver insulin into the subcutaneous fat layer.",
+            explanation: "Routine outpatient insulins are injected subcutaneously into the fat layer just beneath the skin."
           },
           {
-            q: "What is the ideal hourly rate of blood glucose reduction during DKA treatment to prevent cerebral edema?",
-            options: ["50 to 75 mg/dL per hour", "200 to 250 mg/dL per hour", "5 to 10 mg/dL per hour", "300 mg/dL in the first 30 minutes"],
+            q: "Why should a patient NEVER use a standard U-100 syringe to withdraw insulin from a concentrated U-200 or U-300 pen?",
+            options: ["It can cause a 2x or 3x insulin overdose", "The syringe will dissolve", "It causes immediate high blood sugar", "The insulin turns into water"],
             correct: 0,
-            hint: "Dropping blood glucose and serum osmolality too fast pulls water into brain tissue.",
-            explanation: "A gradual glucose reduction of 50–75 mg/dL/hr prevents rapid osmotic fluid shifts and reduces cerebral edema risk."
+            hint: "Pens automatically measure the correct volume per unit; U-100 syringes do not.",
+            explanation: "Concentrated pens (U-200/U-300) deliver the dialed dose in a smaller volume; drawing it into a U-100 syringe leads to severe overdose."
           }
         ]
       },
       {
         id: 4,
-        title: "Module 4: Toxicology & Overdose Care",
-        subtitle: "Insulin Toxicity, Electrolytes & Antidotes",
-        icon: "☠️",
+        title: "Module 4: Hypoglycemia & DKA Emergencies",
+        subtitle: "Rule of 15, Glucagon, DKA & Potassium",
+        icon: "🚑",
         timePerQ: 30,
         questions: [
           {
-            q: "If a patient injects a massive overdose of subcutaneous Insulin Glargine (e.g., 250 units), why can hypoglycemia persist for 36 to 48+ hours?",
-            options: ["The large subcutaneous depot slows absorption kinetics well beyond the normal 24-hour duration", "Glargine permanently destroys glucagon receptors", "Glargine is converted into oral sulfonylureas", "The kidneys stop filtering glucose"],
+            q: "What are the classic early autonomic (adrenergic) warning symptoms of hypoglycemia (<70 mg/dL)?",
+            options: ["Sweating, shakiness (tremors), palpitations, and hunger", "Dry skin, fruity breath, and slow pulse", "High fever and joint pain", "Deep sleep and flushed cheeks"],
             correct: 0,
-            hint: "A large volume injected in one spot has a smaller surface-area-to-volume ratio, delaying absorption.",
-            explanation: "Massive subcutaneous insulin depots compress local capillaries and dissolve slowly, causing prolonged, recurrent hypoglycemia requiring continuous IV dextrose."
+            hint: "Low blood sugar triggers epinephrine (adrenaline) release.",
+            explanation: "Hypoglycemia activates the sympathetic nervous system, causing sweating, trembling, tachycardia, anxiety, and hunger."
           },
           {
-            q: "Which three serum electrolytes drop dangerously due to intracellular shifting during treatment of massive insulin overdose with IV dextrose?",
-            options: ["Potassium (K+), Magnesium (Mg2+), and Phosphate (PO4)", "Sodium, Calcium, and Chloride", "Bicarbonate, Sodium, and Iron", "Calcium, Zinc, and Sodium"],
+            q: "According to the 'Rule of 15', how should mild-to-moderate hypoglycemia (glucose 55 mg/dL) be treated in a conscious patient?",
+            options: ["Give 15–20 g of fast-acting carbs (e.g., juice or glucose tablets) and recheck blood sugar in 15 minutes", "Inject 15 units of Regular insulin", "Give a large fatty meal like pizza", "Wait 2 hours before doing anything"],
             correct: 0,
-            hint: "High insulin + dextrose drives K+, Mg2+, and PO4 rapidly inside cells.",
-            explanation: "Aggressive insulin and dextrose infusions cause intracellular shifting of potassium, magnesium, and phosphate, requiring close ICU monitoring and replacement."
+            hint: "Simple sugars raise blood glucose rapidly without fat slowing absorption.",
+            explanation: "Administer 15–20 g of fast-acting glucose, wait 15 minutes, and recheck blood glucose; repeat if still <70 mg/dL."
           },
           {
-            q: "Which medication is used as an antidote in Sulfonylurea overdose to stop refractory insulin release from pancreatic beta cells?",
-            options: ["Octreotide", "Naloxone", "Flumazenil", "Atropine"],
+            q: "What is the emergency treatment for severe hypoglycemia when a diabetic patient is unconscious and cannot swallow?",
+            options: ["Intramuscular or Intranasal Glucagon (or IV Dextrose if in hospital)", "Pouring sugary juice into the patient's mouth", "Giving oral glucose tablets", "Injecting subcutaneous insulin"],
             correct: 0,
-            hint: "Giving IV dextrose alone in sulfonylurea toxicity triggers rebound insulin spikes; this somatostatin analog shuts down beta-cell secretion.",
-            explanation: "Octreotide activates somatostatin receptors on pancreatic beta cells, inhibiting calcium influx and blocking further sulfonylurea-induced insulin release."
+            hint: "Never put liquids or food into an unconscious person's mouth due to choking risk.",
+            explanation: "Glucagon (IM or intranasal) stimulates the liver to release stored glucose, safely raising blood sugar in unconscious patients."
           },
           {
-            q: "In medical toxicology, High-Dose Insulin Euglycemia Therapy (HIET) is a life-saving treatment for severe overdose of which heart medications?",
-            options: ["Calcium Channel Blockers (e.g., Verapamil) and Beta-Blockers", "ACE Inhibitors", "Statins", "Loop Diuretics"],
+            q: "Which insulin type is used intravenously (IV) in the hospital to treat Diabetic Ketoacidosis (DKA)?",
+            options: ["Regular Human Insulin", "Insulin Glargine (Lantus)", "NPH Insulin", "Insulin Detemir (Levemir)"],
             correct: 0,
-            hint: "High-dose insulin improves myocardial carbohydrate utilization and acts as a strong positive inotrope in cardiogenic shock.",
-            explanation: "HIET (1 unit/kg/hr with dextrose) overcomes toxin-induced myocardial insulin resistance and restores cardiac contractility in CCB and beta-blocker poisoning."
+            hint: "Only clear, short-acting Regular insulin can be given intravenously.",
+            explanation: "Regular insulin is given by continuous IV infusion in DKA because of its short half-life (~5–7 minutes IV), allowing easy dose titration."
           },
           {
-            q: "How can lab tests differentiate surreptitious exogenous insulin injection from an insulin-secreting tumor (insulinoma)?",
-            options: ["Exogenous insulin causes HIGH blood insulin with LOW C-peptide", "Exogenous insulin causes HIGH blood insulin with HIGH C-peptide", "Exogenous insulin causes LOW blood insulin with HIGH C-peptide", "Both show identical high C-peptide"],
+            q: "In DKA management, why must serum Potassium (K+) be checked before starting IV insulin?",
+            options: ["Insulin drives potassium from the blood into cells, which can cause dangerous hypokalemia", "Insulin causes high potassium (hyperkalemia)", "Potassium destroys insulin in the IV bag", "DKA always causes high blood calcium"],
             correct: 0,
-            hint: "Pharmaceutical insulin vials do not contain C-peptide.",
-            explanation: "Exogenous insulin suppresses natural beta-cell secretion (low C-peptide) despite high serum insulin, whereas insulinoma elevates both insulin and C-peptide."
+            hint: "If serum potassium is < 3.3 mEq/L, potassium must be given before starting insulin.",
+            explanation: "Insulin stimulates cellular uptake of potassium; starting insulin when K+ is too low can trigger fatal cardiac arrhythmias."
           },
           {
-            q: "Why does Glucagon often fail to reverse severe hypoglycemia in patients with chronic alcoholism or liver failure?",
-            options: ["Liver glycogen stores are depleted, so glucagon has no glycogen to break down into glucose", "Alcohol destroys glucagon in the blood", "Glucagon turns into insulin in the liver", "Alcohol blocks IV dextrose"],
+            q: "When transitioning a DKA patient from an IV insulin drip to subcutaneous basal insulin (like Glargine), how long should the IV drip continue after the injection?",
+            options: ["1 to 2 hours overlap before stopping the IV drip", "Stop the IV drip at the exact same second", "Stop the IV drip 3 hours before the injection", "Continue the IV drip for 24 hours"],
             correct: 0,
-            hint: "Glucagon works by stimulating hepatic glycogenolysis.",
-            explanation: "Chronic alcohol use depletes hepatic glycogen and blocks gluconeogenesis; without glycogen reserves, glucagon is ineffective and IV dextrose must be given."
+            hint: "Subcutaneous Glargine takes 1–2 hours to start working, while IV insulin wears off in minutes.",
+            explanation: "Overlapping the IV drip for 1–2 hours after SC basal injection prevents a gap in insulin coverage and rebound DKA."
           }
         ]
       },
       {
         id: 5,
-        title: "Module 5: Special Populations & Devices",
-        subtitle: "CKD, Pregnancy, Concentrated Pens & Surgery",
-        icon: "🩺",
+        title: "Module 5: Dosing Calculations & Special Cases",
+        subtitle: "TDD, Carb Counting, Kidney Disease & Pregnancy",
+        icon: "🧮",
         timePerQ: 30,
         questions: [
           {
-            q: "Why do patients with Chronic Kidney Disease (CKD, eGFR < 30 mL/min) often need lower insulin doses?",
-            options: ["Healthy kidneys clear ~30–40% of injected insulin; reduced kidney function prolongs insulin half-life", "Damaged kidneys produce extra insulin", "CKD speeds up stomach emptying", "Kidneys convert NPH into rapid insulin"],
+            q: "A 70 kg patient with Type 1 Diabetes is started on a Total Daily Dose (TDD) of 0.5 units/kg/day. What is their total daily insulin dose?",
+            options: ["35 units/day (typically split into 17.5 units basal and 17.5 units mealtime)", "70 units/day", "10 units/day", "140 units/day"],
             correct: 0,
-            hint: "Reduced renal insulin clearance + impaired renal gluconeogenesis increases hypoglycemia risk.",
-            explanation: "Declining GFR reduces renal insulin degradation and renal gluconeogenesis, requiring proactive dose reductions (25–50%) to avoid hypoglycemia."
+            hint: "Multiply weight (70 kg) by 0.5 units/kg.",
+            explanation: "70 kg × 0.5 units/kg = 35 units/day total, usually split 50% basal (17–18 units) and 50% prandial divided before meals."
           },
           {
-            q: "How do insulin requirements change during pregnancy in a woman with diabetes, and what happens immediately after delivery?",
-            options: ["Needs rise 2–3x in the 2nd/3rd trimesters due to placental hormones, then drop sharply right after delivery", "Needs stay completely constant throughout pregnancy", "Insulin must be stopped in the 3rd trimester", "Needs double immediately after delivery"],
+            q: "A patient has an Insulin-to-Carb Ratio (ICR) of 1:10 (1 unit covers 10 g carbs). How many units of rapid-acting insulin do they need for a meal with 60 g of carbs?",
+            options: ["6 units", "10 units", "3 units", "12 units"],
             correct: 0,
-            hint: "Human placental lactogen causes insulin resistance during late pregnancy and vanishes when the placenta is delivered.",
-            explanation: "Placental hormones drive insulin resistance in late pregnancy; once the placenta is delivered, insulin sensitivity returns rapidly and doses must be cut by ~50%."
+            hint: "Divide 60 grams of carbohydrates by 10.",
+            explanation: "60 grams ÷ 10 grams/unit = 6 units of rapid-acting mealtime insulin."
           },
           {
-            q: "Why must a patient NEVER use a standard U-100 syringe to draw insulin out of a concentrated U-200 or U-300 insulin pen?",
-            options: ["It causes a 2x or 3x overdose because U-100 syringes measure volume for 100 units/mL concentration", "The needle will melt", "U-300 insulin turns into water in a syringe", "It causes instant hyperglycemia"],
+            q: "Why do patients with Chronic Kidney Disease (CKD) often require lower insulin doses?",
+            options: ["The kidneys help clear injected insulin from the blood, so kidney impairment makes insulin last longer", "Damaged kidneys produce extra insulin", "CKD increases appetite dramatically", "Kidneys convert basal insulin into rapid insulin"],
             correct: 0,
-            hint: "Insulin pens automatically adjust the volume per dialed unit; standard syringes do not.",
-            explanation: "Drawing U-300 insulin into a U-100 syringe delivers 3 times the intended dose, risking severe life-threatening hypoglycemia."
+            hint: "Reduced renal insulin clearance increases the risk of low blood sugar.",
+            explanation: "Kidneys degrade ~30–40% of injected insulin; as kidney function declines, insulin stays in the body longer, requiring lower doses."
           },
           {
-            q: "On the morning of surgery (while fasting / NPO), how should a Type 1 Diabetes patient's basal insulin (e.g., Glargine) be managed?",
-            options: ["Give 75–80% of the usual basal dose (never omit completely) while holding mealtime rapid insulin", "Stop all basal and mealtime insulin completely", "Give double the usual basal dose", "Take full mealtime rapid insulin without eating"],
+            q: "How do insulin needs typically change during the second and third trimesters of pregnancy?",
+            options: ["Insulin needs increase significantly due to placental hormones causing insulin resistance", "Insulin needs drop to zero", "Insulin needs stay completely unchanged", "Insulin must be replaced with oral sulfonylureas"],
             correct: 0,
-            hint: "Type 1 Diabetes patients always need basal insulin even when fasting to prevent surgical stress DKA.",
-            explanation: "Giving 75–80% of basal insulin prevents ketoacidosis during surgical stress while minimizing fasting hypoglycemia."
+            hint: "Placental hormones (like human placental lactogen) oppose insulin action in late pregnancy.",
+            explanation: "Insulin requirements rise 2–3 times during the 2nd and 3rd trimesters and drop rapidly right after delivery of the placenta."
           },
           {
-            q: "Afrezza (inhaled human insulin) is strictly contraindicated in which patients?",
-            options: ["Patients with chronic lung disease such as Asthma or COPD", "Patients with Type 1 Diabetes", "Patients taking Metformin", "Patients over age 50"],
+            q: "Inhaled human insulin (Afrezza) is contraindicated in patients with which medical condition?",
+            options: ["Asthma or COPD (chronic lung disease)", "Type 1 Diabetes", "Mild hypertension", "High cholesterol"],
             correct: 0,
-            hint: "Inhaled insulin carries a Boxed Warning for acute bronchospasm.",
-            explanation: "Afrezza can trigger acute bronchospasm and decline in lung function (FEV1), making it contraindicated in asthma, COPD, and active smokers."
+            hint: "Inhaled insulin can trigger sudden bronchospasm in patients with airway disease.",
+            explanation: "Afrezza carries a warning for acute bronchospasm and is strictly contraindicated in patients with asthma, COPD, or active smoking."
           },
           {
-            q: "Which insulin is compatible for direct addition into a Total Parenteral Nutrition (TPN) bag?",
-            options: ["Regular Human Insulin only", "Insulin Glargine", "NPH Insulin", "Insulin Degludec"],
+            q: "When switching a patient from twice-daily NPH insulin (40 units/day total) to once-daily Insulin Glargine, how should the dose be adjusted?",
+            options: ["Reduce the total daily basal dose by 20% (to 32 units once daily)", "Double the dose to 80 units", "Cut the dose in half to 20 units", "Give 40 units twice daily"],
             correct: 0,
-            hint: "Only clear, short-acting Regular insulin is physically stable inside TPN solutions.",
-            explanation: "Regular insulin is added directly to TPN bags so that if the TPN infusion is paused, insulin delivery stops simultaneously."
+            hint: "A 20% dose reduction helps prevent hypoglycemia when switching from BID NPH to QD Glargine.",
+            explanation: "Standard clinical guidelines recommend reducing the total NPH dose by 20% (40 × 0.8 = 32 units) when converting to once-daily Glargine."
           }
         ]
       },
       {
         id: 6,
-        title: "Module 6: Clinical Interactions & Mastery",
-        subtitle: "Drug Interactions, Dawn vs Somogyi & Counseling",
+        title: "Module 6: Drug Interactions & Patient Counseling",
+        subtitle: "Beta-Blockers, Steroids, Sick Days & Dawn vs Somogyi",
         icon: "👑",
         timePerQ: 30,
         questions: [
           {
-            q: "A patient on insulin and Empagliflozin (an SGLT2 inhibitor) fasts before surgery and develops ketoacidosis (high anion gap, ketones) with a blood glucose of only 160 mg/dL. What is this called?",
-            options: ["Euglycemic Diabetic Ketoacidosis (euDKA)", "Somogyi Effect", "Insulin Edema", "Dawn Phenomenon"],
+            q: "Why must non-selective beta-blockers (such as Propranolol) be used carefully in patients taking insulin?",
+            options: ["They can mask hypoglycemia warning symptoms like rapid heartbeat and tremors", "They destroy insulin in the liver", "They cause severe hyperglycemia", "They prevent insulin pens from working"],
             correct: 0,
-            hint: "SGLT2 inhibitors flush glucose into the urine, keeping blood sugar < 250 mg/dL even during active ketoacidosis.",
-            explanation: "Euglycemic DKA occurs when SGLT2 inhibitors lower plasma glucose via glycosuria while fasting/low insulin triggers ketogenesis."
+            hint: "Sweating still occurs, but palpitations and shakiness are hidden by beta-blockers.",
+            explanation: "Beta-blockers block adrenergic symptoms (tachycardia, tremor) of low blood sugar, making it harder for patients to recognize hypoglycemia early."
           },
           {
-            q: "Why does combining Pioglitazone (a TZD) with insulin increase the risk of peripheral edema and heart failure?",
-            options: ["Both drugs increase sodium and water reabsorption in the kidney's collecting duct", "Pioglitazone destroys heart valves", "Insulin blocks kidney blood flow completely", "They cause severe dehydration"],
+            q: "What happens to blood glucose and insulin requirements when a diabetic patient starts high-dose corticosteroids (e.g., Prednisone)?",
+            options: ["Blood glucose rises significantly, usually requiring higher insulin doses", "Blood glucose drops dangerously low", "Insulin is no longer needed", "Corticosteroids have no effect on blood sugar"],
             correct: 0,
-            hint: "Both insulin and PPAR-gamma agonists stimulate renal ENaC sodium channels.",
-            explanation: "Synergistic renal sodium and fluid retention can cause significant weight gain, edema, and heart failure exacerbation."
+            hint: "Steroids stimulate liver glucose production and cause insulin resistance.",
+            explanation: "Systemic corticosteroids increase hepatic gluconeogenesis and insulin resistance, commonly requiring temporary increases in insulin doses."
           },
           {
-            q: "Which class of antibiotics carries an FDA warning for causing severe hypoglycemia (by blocking beta-cell KATP channels) in diabetic patients?",
-            options: ["Fluoroquinolones (e.g., Levofloxacin, Moxifloxacin)", "Penicillins (e.g., Amoxicillin)", "Tetracyclines (e.g., Doxycycline)", "Cephalosporins (e.g., Cephalexin)"],
+            q: "What is the 'Dawn Phenomenon' in a patient with diabetes?",
+            options: ["Early-morning rise in blood glucose (4–8 AM) caused by normal surges in cortisol and growth hormone", "Low blood sugar right after lunch", "Skin rash at the injection site", "Allergic reaction to insulin pens"],
             correct: 0,
-            hint: "These antibiotics act similarly to sulfonylureas on pancreatic beta cells.",
-            explanation: "Fluoroquinolones can block beta-cell KATP channels, stimulating inappropriate insulin release and severe hypoglycemia."
+            hint: "It happens naturally around dawn due to morning counter-regulatory hormones.",
+            explanation: "The Dawn Phenomenon is early-morning hyperglycemia triggered by overnight surges of growth hormone and cortisol."
           },
           {
-            q: "How do you distinguish the 'Somogyi Effect' from the 'Dawn Phenomenon' in a patient with high morning fasting blood glucose?",
-            options: ["Check blood glucose at 3:00 AM: low (<70 mg/dL) indicates Somogyi Effect, while normal/rising indicates Dawn Phenomenon", "Check morning urine color", "Measure serum sodium", "Switch injection sites from abdomen to arm"],
+            q: "What is the 'Somogyi Effect'?",
+            options: ["Rebound high blood sugar in the morning caused by an episode of low blood sugar (hypoglycemia) during the night", "High blood sugar immediately after eating candy", "Weight loss caused by insulin", "Kidney stones from insulin therapy"],
             correct: 0,
-            hint: "Somogyi is rebound hyperglycemia after nocturnal hypoglycemia; Dawn is an early-morning hormone surge.",
-            explanation: "A 3:00 AM glucose <70 mg/dL confirms the Somogyi Effect (treated by lowering evening basal insulin), whereas normal 3:00 AM glucose confirms Dawn Phenomenon."
+            hint: "Nocturnal hypoglycemia triggers stress hormones that push morning blood sugar high.",
+            explanation: "The Somogyi Effect is morning rebound hyperglycemia following untreated nocturnal hypoglycemia, managed by reducing evening insulin."
           },
           {
-            q: "Why are non-selective beta-blockers (like Propranolol) used cautiously in insulin-treated patients?",
-            options: ["They mask warning symptoms of hypoglycemia (rapid heartbeat and tremors), leaving sweating as the main clue", "They destroy insulin in the syringe", "They cause extreme hyperglycemia", "They prevent insulin absorption from the skin"],
+            q: "What crucial advice should a pharmacist give a Type 1 Diabetes patient on 'Sick Days' when they have fever or nausea and are eating less?",
+            options: ["Never stop taking basal insulin, check blood glucose and ketones frequently, and stay hydrated", "Stop all insulin completely until feeling better", "Double all mealtime insulin doses without eating", "Only drink coffee and energy drinks"],
             correct: 0,
-            hint: "Adrenergic symptoms are blunted, while cholinergic sweating remains intact.",
-            explanation: "Beta-blockers block tachycardia and tremor during hypoglycemia, increasing the risk of unrecognized severe low blood sugar."
+            hint: "Illness stress hormones raise blood glucose even if the patient is eating less; stopping basal insulin can cause DKA.",
+            explanation: "During illness, stress hormones elevate blood glucose and ketone production; omitting basal insulin in Type 1 Diabetes can rapidly trigger DKA."
           },
           {
-            q: "Once opened and in use, how long can most standard insulin pens/vials (such as Glargine, Lispro, Aspart, Regular) be safely stored at room temperature (<25–30°C)?",
-            options: ["Up to 28 days", "Only 24 hours", "6 months", "Must stay frozen until each use"],
+            q: "Which oral diabetes drug class, when combined with insulin during fasting or surgery, can rarely cause Diabetic Ketoacidosis with near-normal blood sugar (euglycemic DKA)?",
+            options: ["SGLT2 Inhibitors (e.g., Empagliflozin, Dapagliflozin)", "Metformin", "Acarbose", "Sitagliptin"],
             correct: 0,
-            hint: "Keeping in-use insulin at room temperature for up to 4 weeks reduces painful injections.",
-            explanation: "Unopened insulin is kept refrigerated (2–8°C), while most opened vials/pens remain stable at room temperature for 28 days (42 days for Detemir/Degludec)."
+            hint: "These drugs increase urinary glucose excretion, keeping blood glucose below 250 mg/dL even if ketones build up.",
+            explanation: "SGLT2 inhibitors promote glucose loss in urine, masking high blood sugar during ketoacidosis (euglycemic DKA); they should be held 3–4 days before surgery."
           }
         ]
       }
@@ -496,7 +496,7 @@
       totalScore: 0,
       currentStageId: 1,
       qIndex: 0,
-      hearts: 3, // Balanced: 3 lives per stage
+      hearts: 3, // 3 lives per stage
       streak: 0,
       stageScore: 0,
       correctCount: 0,
@@ -514,9 +514,9 @@
     function updateHeader() {
       document.getElementById('globalScore').textContent = state.totalScore;
       const rankEl = document.getElementById('rankBadge');
-      if (state.totalScore >= 4000) rankEl.textContent = "👑 MNU Board Master";
-      else if (state.totalScore >= 2600) rankEl.textContent = "🩺 Clinical Specialist";
-      else if (state.totalScore >= 1300) rankEl.textContent = "💊 Senior PharmD Candidate";
+      if (state.totalScore >= 3800) rankEl.textContent = "👑 MNU Clinical Master";
+      else if (state.totalScore >= 2400) rankEl.textContent = "🩺 Senior Pharmacy Scholar";
+      else if (state.totalScore >= 1200) rankEl.textContent = "💊 Clinical Intern";
       else rankEl.textContent = "🎓 MNU Pharmacy Student";
     }
 
@@ -542,15 +542,15 @@
           </div>
 
           <h2 class="font-royal text-2xl sm:text-4xl font-black text-white mb-3 tracking-wide">
-            INSULIN CLINICAL <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500">CHALLENGE</span>
+            INSULIN PHARMACY <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500">CHALLENGE</span>
           </h2>
           <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 max-w-2xl mx-auto">
-            Master <strong>36 clinical cases</strong> across <strong>6 specialized modules</strong>: Insulin Structure & SAR, Dosing Calculations, DKA/HHS Emergencies, Toxicology, Special Populations & Drug Interactions.
+            An interactive learning journey of <strong>36 clear clinical questions</strong> across <strong>6 modules</strong>—covering insulin physiology, types, storage, dosing math, emergencies, and drug interactions.
           </p>
 
           <!-- Student Name Input for Certificate -->
           <div class="max-w-md mx-auto mb-6">
-            <input id="studentNameInput" type="text" value="${state.playerName}" placeholder="Enter your full name (for completion certificate)..."
+            <input id="studentNameInput" type="text" value="${state.playerName}" placeholder="Enter your name (for your MNU certificate)..."
                    class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-amber-500/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 text-center font-semibold">
           </div>
 
@@ -558,22 +558,22 @@
             <div class="bg-slate-950/80 border border-amber-500/20 p-3.5 rounded-2xl">
               <div class="text-lg mb-1">📚</div>
               <div class="font-bold text-amber-300 text-xs sm:text-sm">6 Modules</div>
-              <div class="text-[11px] text-slate-400">36 Clinical Cases</div>
+              <div class="text-[11px] text-slate-400">36 Student Cases</div>
             </div>
             <div class="bg-slate-950/80 border border-amber-500/20 p-3.5 rounded-2xl">
               <div class="text-lg mb-1">❤️</div>
-              <div class="font-bold text-emerald-400 text-xs sm:text-sm">3 Lives / Stage</div>
-              <div class="text-[11px] text-slate-400">Pass ≥ 4/6 Cases</div>
+              <div class="font-bold text-emerald-400 text-xs sm:text-sm">3 Hearts / Stage</div>
+              <div class="text-[11px] text-slate-400">Pass ≥ 3/6 Correct</div>
             </div>
             <div class="bg-slate-950/80 border border-amber-500/20 p-3.5 rounded-2xl">
               <div class="text-lg mb-1">⏱️</div>
-              <div class="font-bold text-sky-300 text-xs sm:text-sm">30s Timer</div>
-              <div class="text-[11px] text-slate-400">+ 3 Consult Lifelines</div>
+              <div class="font-bold text-sky-300 text-xs sm:text-sm">30s Per Question</div>
+              <div class="text-[11px] text-slate-400">+ 3 Helpful Lifelines</div>
             </div>
           </div>
 
           <button onclick="enterExam()" class="gold-btn w-full sm:w-auto px-12 py-4 rounded-2xl font-black text-base sm:text-lg transition">
-            Start Clinical Challenge 🚀
+            Start Challenge 🚀
           </button>
         </div>
       `;
@@ -581,7 +581,7 @@
 
     function enterExam() {
       const inputEl = document.getElementById('studentNameInput');
-      if (inputEl) state.playerName = inputEl.value.trim() || "MNU Pharmacy Scholar";
+      if (inputEl) state.playerName = inputEl.value.trim() || "MNU Pharmacy Student";
       sfx.click();
       renderMap();
     }
@@ -611,9 +611,9 @@
             <h3 class="text-sm sm:text-base font-extrabold text-white leading-snug mb-1">${stage.title}</h3>
             <p class="text-xs text-slate-400 mb-4">${stage.subtitle}</p>
             <div class="flex items-center justify-between text-xs font-bold pt-3 border-t border-slate-800">
-              <span class="text-sky-300">${stage.questions.length} Cases • 30s</span>
+              <span class="text-sky-300">${stage.questions.length} Questions • 30s</span>
               <span class="${isUnlocked ? 'text-amber-400' : 'text-slate-500'}">
-                ${stars > 0 ? 'Retake ↻' : (isUnlocked ? 'Enter →' : 'Locked')}
+                ${stars > 0 ? 'Replay ↻' : (isUnlocked ? 'Start →' : 'Locked')}
               </span>
             </div>
           </div>
@@ -624,8 +624,8 @@
         <div class="animate-pop">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-4 px-1">
             <div>
-              <h2 class="text-lg sm:text-2xl font-black text-white">Candidate: <span class="text-amber-400">${state.playerName}</span></h2>
-              <p class="text-xs text-slate-400">Score at least 4/6 correct answers per module to unlock the next level</p>
+              <h2 class="text-lg sm:text-2xl font-black text-white">Student: <span class="text-amber-400">${state.playerName}</span></h2>
+              <p class="text-xs text-slate-400">Answer at least 3/6 questions correctly in each module to unlock the next level</p>
             </div>
             <div class="flex items-center gap-2">
               ${allCompleted ? `
@@ -650,7 +650,7 @@
       sfx.click();
       state.currentStageId = stageId;
       state.qIndex = 0;
-      state.hearts = 3; // Balanced: 3 lives
+      state.hearts = 3;
       state.streak = 0;
       state.stageScore = 0;
       state.correctCount = 0;
@@ -660,12 +660,11 @@
 
     function loadQuestion() {
       clearInterval(state.timerInterval);
-      const stage = STAGES.find(s => s.id === state.currentStageId);
       state.answered = false;
       state.hiddenOptions = [];
       state.showHintBox = false;
       state.timeFrozen = false;
-      state.timer = 30; // 30 seconds per question
+      state.timer = 30;
 
       renderQuizUI();
 
@@ -733,7 +732,7 @@
             <div class="flex items-center gap-2">
               <button onclick="renderMap()" class="text-xs bg-slate-900 hover:bg-slate-800 text-slate-300 px-2.5 py-1.5 rounded-lg border border-slate-700">✕ Exit</button>
               <span class="text-xs font-bold text-amber-300 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-400/25">
-                ${stage.title.split(':')[0]} • Case ${state.qIndex + 1}/${stage.questions.length}
+                ${stage.title.split(':')[0]} • Question ${state.qIndex + 1}/${stage.questions.length}
               </span>
             </div>
 
@@ -758,14 +757,14 @@
 
           <!-- Lifelines Bar -->
           <div class="flex flex-wrap items-center gap-2 mb-5">
-            <span class="text-xs text-slate-400 font-semibold mr-1">Consultations:</span>
+            <span class="text-xs text-slate-400 font-semibold mr-1">Lifelines:</span>
             <button onclick="useFiftyFifty()" ${!state.lifelines.fifty || state.answered ? 'disabled' : ''} 
                     class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.fifty && !state.answered ? 'bg-sky-950/80 border-sky-500/40 text-sky-300 hover:bg-sky-900' : 'bg-slate-950 border-slate-800 text-slate-600 cursor-not-allowed'}">
               ✂️ 50:50
             </button>
             <button onclick="useHint()" ${!state.lifelines.hint || state.answered ? 'disabled' : ''} 
                     class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.hint && !state.answered ? 'bg-amber-950/80 border-amber-500/40 text-amber-300 hover:bg-amber-900' : 'bg-slate-950 border-slate-800 text-slate-600 cursor-not-allowed'}">
-              💡 Faculty Clue
+              💡 Hint
             </button>
             <button onclick="useFreeze()" ${!state.lifelines.freeze || state.answered ? 'disabled' : ''} 
                     class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${state.lifelines.freeze && !state.answered ? 'bg-indigo-950/80 border-indigo-500/40 text-indigo-300 hover:bg-indigo-900' : 'bg-slate-950 border-slate-800 text-slate-600 cursor-not-allowed'}">
@@ -777,7 +776,7 @@
           ${state.showHintBox ? `
             <div class="mb-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-400/35 text-amber-200 text-xs sm:text-sm flex items-start gap-2.5 animate-pop">
               <span class="text-base">💡</span>
-              <div><strong>Pharmacology Clue:</strong> ${qObj.hint}</div>
+              <div><strong>Study Hint:</strong> ${qObj.hint}</div>
             </div>
           ` : ''}
 
@@ -786,16 +785,16 @@
             ${optionsHtml}
           </div>
 
-          <!-- Clinical Rationale Card -->
+          <!-- Clinical Explanation Card -->
           ${state.answered ? `
             <div class="p-4 rounded-2xl ${selectedIdx === qObj.correct ? 'bg-emerald-950/65 border-emerald-500/40' : 'bg-rose-950/65 border-rose-500/40'} border mb-4 animate-pop">
               <div class="font-black text-sm mb-1 ${selectedIdx === qObj.correct ? 'text-emerald-300' : 'text-rose-300'}">
-                ${selectedIdx === qObj.correct ? '✅ Verified Clinical Answer:' : (selectedIdx === -1 ? '⏰ Time Expired — Clinical Rationale:' : '❌ Incorrect — Clinical Rationale:')}
+                ${selectedIdx === qObj.correct ? '✅ Great Job! Explanation:' : (selectedIdx === -1 ? '⏰ Time Up! Explanation:' : '❌ Not Quite — Explanation:')}
               </div>
               <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${qObj.explanation}</p>
             </div>
             <button onclick="nextStep()" class="gold-btn w-full py-3.5 rounded-2xl font-black text-base transition">
-              ${state.hearts <= 0 ? 'View Module Evaluation →' : (state.qIndex + 1 < stage.questions.length ? 'Next Clinical Case →' : 'Complete Module 🏆')}
+              ${state.hearts <= 0 ? 'View Module Results →' : (state.qIndex + 1 < stage.questions.length ? 'Next Question →' : 'Finish Module 🏆')}
             </button>
           ` : ''}
         </div>
@@ -845,7 +844,7 @@
         state.correctCount++;
         const speedBonus = Math.round(state.timer * 3);
         const streakBonus = state.streak > 1 ? state.streak * 20 : 0;
-        const points = 120 + speedBonus + streakBonus;
+        const points = 100 + speedBonus + streakBonus;
         state.stageScore += points;
         state.totalScore += points;
         updateHeader();
@@ -873,13 +872,13 @@
     function renderStageResult() {
       clearInterval(state.timerInterval);
       const stage = STAGES.find(s => s.id === state.currentStageId);
-      // Balanced passing requirement: >= 4 out of 6 correct
-      const passed = state.hearts > 0 && state.correctCount >= 4;
+      // Student-friendly passing requirement: >= 3 out of 6 correct
+      const passed = state.hearts > 0 && state.correctCount >= 3;
 
       let stars = 0;
       if (passed) {
         sfx.win();
-        stars = state.correctCount === 6 ? 3 : (state.correctCount === 5 ? 2 : 1);
+        stars = state.correctCount === 6 ? 3 : (state.correctCount >= 4 ? 2 : 1);
         const prevStars = state.completedStages[stage.id] || 0;
         if (stars > prevStars) state.completedStages[stage.id] = stars;
         if (stage.id === state.unlockedStage && state.unlockedStage < STAGES.length) {
@@ -896,12 +895,12 @@
         <div class="luxury-card rounded-3xl p-6 sm:p-10 text-center animate-pop max-w-xl mx-auto">
           <div class="text-5xl mb-3">${passed ? '🏆' : '💔'}</div>
           <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">
-            ${passed ? 'Module Passed!' : 'Module Not Passed'}
+            ${passed ? 'Module Completed!' : 'Try Again!'}
           </h2>
           <p class="text-sm text-slate-300 mb-6">
             ${passed 
-              ? `Great clinical judgment in ${stage.title}.` 
-              : 'You need at least 4/6 correct answers with remaining lives to unlock the next module.'}
+              ? `Well done! You passed ${stage.title}.` 
+              : 'You need at least 3/6 correct answers with remaining hearts to unlock the next module.'}
           </p>
 
           <div class="flex justify-center gap-2 text-3xl mb-6">
@@ -910,7 +909,7 @@
 
           <div class="grid grid-cols-2 gap-3 mb-7">
             <div class="bg-slate-950/90 border border-slate-800 p-4 rounded-2xl">
-              <div class="text-xs text-slate-400 mb-1">Cases Solved</div>
+              <div class="text-xs text-slate-400 mb-1">Correct Answers</div>
               <div class="text-xl font-black ${passed ? 'text-emerald-400' : 'text-rose-400'}">${state.correctCount} / ${stage.questions.length}</div>
             </div>
             <div class="bg-slate-950/90 border border-slate-800 p-4 rounded-2xl">
@@ -921,7 +920,7 @@
 
           <div class="flex flex-col sm:flex-row gap-3 justify-center">
             <button onclick="startStage(${stage.id})" class="px-6 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm border border-slate-700 transition">
-              Retry Module ↻
+              Replay Module ↻
             </button>
             ${allCleared ? `
               <button onclick="renderCertificate()" class="gold-btn px-8 py-3.5 rounded-2xl font-black text-sm transition">
@@ -960,14 +959,14 @@
           </div>
 
           <h2 class="font-royal text-2xl sm:text-4xl font-black text-white mb-3">
-            CERTIFICATE OF CLINICAL MASTERY
+            CERTIFICATE OF ACHIEVEMENT
           </h2>
           <p class="text-xs sm:text-sm text-slate-300 mb-3">This certifies that</p>
           <div class="text-2xl sm:text-3xl font-black text-amber-300 border-b border-amber-400/40 inline-block px-8 pb-2 mb-4">
             ${state.playerName}
           </div>
           <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed mb-6">
-            has successfully completed all <strong>6 Clinical Modules (36 Cases)</strong> in <em>Insulin Pharmacotherapy, ICU Crises & Toxicology</em> with a cumulative score of <strong class="text-amber-300">${state.totalScore} points</strong>.
+            has successfully completed all <strong>6 Modules (36 Questions)</strong> in <em>Insulin Pharmacology & Clinical Therapeutics</em> with a total score of <strong class="text-amber-300">${state.totalScore} points</strong>.
           </p>
 
           <div class="flex flex-wrap justify-center gap-3">
